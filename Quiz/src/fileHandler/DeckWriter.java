@@ -28,12 +28,11 @@ import deck.*;
 public class DeckWriter {
 
 	/**
-	 * Stores a deck in a shape of a .dk file
-	 * 
-	 * @param name
-	 *            the name of the deck to be written
-	 * @param d
-	 *            the deck itself
+	 * Converts a Deck into a String to be written into a *.dk file when storing a deck as a file on the computer.
+	 * Note that the format used matches the one the method stringToDeck uses to convert a String into a Deck 
+	 * @param d the deck itself
+	 * @return a String containing all the questions of the deck. 
+	 * @see #stringToDeck(String)
 	 */
 	public static String deckToString(Deck d) {
 		String s = "";
@@ -56,9 +55,9 @@ public class DeckWriter {
 	 * Returns a Deck exploitable by the program from a String. This method is
 	 * used when loading a deck from a .dk file where all the questions are
 	 * stored as String data.
-	 * 
-	 * @param s
-	 * @return
+	 * @param s The String (from a file) to be converted as a Deck
+	 * @return a Deck object created from the String given as parameter
+	 * @see #deckToString(Deck)
 	 */
 	public static Deck stringToDeck(String s) {
 		Deck d = new Deck();

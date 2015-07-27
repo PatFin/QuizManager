@@ -129,8 +129,8 @@ public class DeckEle {
 
 	/**
 	 * Gives the question contained by the DeckElement
-	 * 
-	 * @return the question
+	 * It will return null if the Question contained by this is ... well null!
+	 * @return the question contained by this DeckEle
 	 */
 	public Question getQuestion() {
 		return this.question;

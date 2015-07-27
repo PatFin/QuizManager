@@ -41,10 +41,7 @@ public class MessagePanel extends JPanel {
 	 * parameter and of width indicated. The text font will automatically adapt
 	 * to the size of the MessagePanel
 	 * 
-	 * @param text
-	 *            String to be displayed
-	 * @param width
-	 *            the width (in pixels) of the panel
+	 * @param text String to be displayed in the Panel
 	 */
 	public MessagePanel(String text) {
 		super();

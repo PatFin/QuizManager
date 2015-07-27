@@ -30,7 +30,6 @@ public class DeckFileFilter extends FileFilter {
 
 	/*
 	 * (non-Javadoc)
-	 * 
 	 * @see javax.swing.filechooser.FileFilter#getDescription()
 	 */
 	@Override

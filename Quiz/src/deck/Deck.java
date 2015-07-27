@@ -103,8 +103,7 @@ public class Deck {
 
 	/**
 	 * Gives the question of the current (ie root) element of the list.
-	 * 
-	 * @return
+	 * @return the current Question of the deck.
 	 */
 	public Question getCurrentQuestion() {
 		return root.question;
@@ -116,7 +115,7 @@ public class Deck {
 	 * pointerExcpetion is encountered (poorly initialised question), returns 2.
 	 * If no problem encountered, returns 0.
 	 * 
-	 * @return
+	 * @return 0 if operation succeeded, 1 if deck is empty, 2 if a question is 'null' in a DeckEle of the Deck.
 	 */
 	public int resetSuccess() {
 		// Checking the first element
