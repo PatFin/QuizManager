@@ -3,7 +3,9 @@ This repository contains the files for the java desktop application QuizManager.
 
 <h1>You wish to use the software for your own purposes?</h1>
 
-There is an executable Java ARchive (QuizManager.jar) is available for download in the <em>Jars</em> folder. You will need the <em>Java Runtime Environment</em> installed on your computer to make it run.
+There is an executable Java ARchive (QuizManager.jar) available for download in the <em>Jars</em> folder. Or you can just click on <a href="https://github.com/PatFin/QuizManager/blob/master/Jars/QuizManager.jar?raw=true" target="_blank">this link</a> to download it. You will need the <em>Java Runtime Environment</em> installed on your computer to make it run.
+
+A <a href="https://raw.githubusercontent.com/PatFin/QuizManager/master/QuizManager_Manual_v1.0.html" target="_blank">user manual is also available in the repository. I hope it is as clear as it can be. Again if you feel something is not right with it or if you don't understand something, do not hesitate to contact me! 
 
 <h1>You want the software to do more things?</h1>
 
