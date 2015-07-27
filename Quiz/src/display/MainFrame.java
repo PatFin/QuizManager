@@ -70,7 +70,7 @@ public class MainFrame extends JFrame implements RequestToFrame {
 	 * welcome message
 	 */
 	public MainFrame() {
-		super("Finnerty Quiz");
+		super("Quiz Manager 1.0");
 		this.setResizable(true);
 		this.setPreferredSize(new Dimension(500, 600));
 		this.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
