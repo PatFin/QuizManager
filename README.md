@@ -20,4 +20,4 @@ _ DeckEditor is the JFrame that handles the editing of decks. IT CONTAINS A MAIN
 _ package fileHandler contains a single class:
 _ Class DeckWriter is the class capable of converting a Deck object into a text writable in a file. It also contains a method capable of converting a text (from a file) into a Deck object (if formated correctly).
 
-That's pretty much it. You will find more details in the JAVADOC available in the Quiz/Javadoc/ folder.
+That's pretty much it. You will find more details in the JAVADOC available in the Quiz/doc/ folder.
