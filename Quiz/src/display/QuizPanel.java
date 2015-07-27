@@ -41,22 +41,22 @@ import deck.Question;
  *         You should have received a copy of the GNU General Public License
  *         along with this program. If not, see <http://www.gnu.org/licenses/>.
  */
-public class QuizPanel extends javax.swing.JPanel implements AnswerProvided {
+public abstract class QuizPanel extends javax.swing.JPanel implements AnswerProvided {
 
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = -7364894838943006404L;
 
-	private JLabel question;
-	private AnswerPanel answers;
-	private JButton next;
+	protected JLabel question;
+	protected AnswerPanel answers;
+	protected JButton next;
 
-	private QuizState state;
+	protected QuizState state;
 
-	private Deck current;
-	private int success;
-	RequestToFrame container;
+	protected Deck current;
+	protected int success;
+	protected RequestToFrame container;
 
 	/**
 	 * Constructor Creates the various fields of the GUI.
@@ -64,7 +64,7 @@ public class QuizPanel extends javax.swing.JPanel implements AnswerProvided {
 	 * @param o
 	 *            the container that needs to implement RequestToFrame
 	 */
-	public QuizPanel(final RequestToFrame o) {
+	public QuizPanel(RequestToFrame o) {
 
 		this.container = o;
 
@@ -90,18 +90,14 @@ public class QuizPanel extends javax.swing.JPanel implements AnswerProvided {
 					break;
 				case ANSWER:
 					if (current.noQuestionLeft()) {
-						o.requestMessage("Congratulations, you have finished this deck!");
+						container.requestMessage("Congratulations, you have finished this deck!");
 					} else {
-						try {
-							setQuestion(current.next());
-						} catch (Exception e) {
-							e.printStackTrace();
-						}
+						setQuestion(current.next());
 					}
 				}
 			}
 		});
-		// next.setPreferredSize(new Dimension(150,60));
+		
 		GridBagConstraints c = new GridBagConstraints();
 
 		for (int i = 0; i < 3; i++) {
@@ -133,29 +129,11 @@ public class QuizPanel extends javax.swing.JPanel implements AnswerProvided {
 	}
 
 	/**
-	 * Allows to display the answer to a question A congratulations message is
-	 * displayed if the value given as parameter is true.
+	 * Handles what is to be done when an answer has been provided
 	 * 
 	 * @param goodAnswer
 	 */
-	public void showAnswer(boolean goodAnswer) {
-		// TODO modify the message according to the boolean
-		answers.showExplanation(goodAnswer);
-		next.setText("Next Question ->");
-
-		// We increment success of the question if goodAnswer
-		Question q = current.getCurrentQuestion();
-		if (goodAnswer) {
-			q.success++;
-		}
-
-		// We add again the question at the end of the deck if it hasn't been
-		// succeeded enough yet.
-		if (q.success < this.success) {
-			current.addQuestion(q);
-		}
-		this.state = QuizState.ANSWER;
-	}
+	public abstract void showAnswer(boolean goodAnswer);
 
 	/**
 	 * Launches a new quiz with the deck given as parameter. All the cards in
@@ -166,12 +144,8 @@ public class QuizPanel extends javax.swing.JPanel implements AnswerProvided {
 	 * seen at least the number of success + number of occurrences in the deck
 	 * If the integer success value is less than 1, the deck will be gone
 	 * through only once.
-	 * 
-	 * @param d
-	 *            the deck which is going to be studied
-	 * @param s
-	 *            the number of times a card needs to be answered correctly for
-	 *            it not to be added again at the end of the deck
+	 * @param d the deck which is going to be studied
+	 * @param s the number of times a card needs to be answered correctly for it not to be added again at the end of the deck
 	 */
 	public void handleQuiz(Deck d, int s) {
 		if (d.resetSuccess() == 0) {
@@ -179,7 +153,7 @@ public class QuizPanel extends javax.swing.JPanel implements AnswerProvided {
 			this.success = s;
 			setQuestion(current.getCurrentQuestion());
 		} else {
-			System.out.println("Invalid deck provided");
+			container.requestMessage("Invalid deck provided");
 		}
 
 	}
@@ -209,7 +183,7 @@ public class QuizPanel extends javax.swing.JPanel implements AnswerProvided {
 	 * 
 	 * @author Patrick possible values : QUESTION ANSWER.
 	 */
-	private enum QuizState {
+	protected enum QuizState {
 		QUESTION, ANSWER;
 	}
 }

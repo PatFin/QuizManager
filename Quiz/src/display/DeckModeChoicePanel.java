@@ -16,8 +16,8 @@ import deck.Deck;
  * an explanation is provided after each answer and the question repeated until
  * the user reaches a certain number of good answers (can change this number in
  * Preferences Menu in class MainFrame) _Test mode where all the questions are
- * only showed once and the total score is given at the end of the quiz. TODO
- * Several improvments could be made. TestMode displays the explanations for
+ * only showed once and the total score is given at the end of the quiz.
+ * Several improvements could be made. TestMode displays the explanations for
  * now, I would like a specific display by mode for the end of the quiz.
  * 
  * @author Patrick Created by Patrick Finnerty, this program allows for the

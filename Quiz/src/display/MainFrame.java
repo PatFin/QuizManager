@@ -81,7 +81,7 @@ public class MainFrame extends JFrame implements RequestToFrame {
 		clPanel.setLayout(new CardLayout(1, 1));
 		success = 3;
 
-		this.quizPanel = new QuizPanel(this);
+		this.quizPanel = new LearningQuizPanel(this);
 		this.message = new MessagePanel("");
 		this.gameModeChoice = new DeckModeChoicePanel(this);
 		this.requestMessage("Welcome to Quiz Manager v1.0");
@@ -196,12 +196,8 @@ public class MainFrame extends JFrame implements RequestToFrame {
 
 	/**
 	 * Launches a new quiz
-	 * 
-	 * @param d
-	 *            the quiz to be launched
-	 * @param i
-	 *            the number of times the card needs to be answered properly
-	 *            before it is not added anymore at the end of the deck
+	 * @param d the quiz to be launched
+	 * @param i the number of times the card needs to be answered properly before it is not added anymore at the end of the deck
 	 */
 	private void handleQuiz(Deck d, int i) {
 		this.quizPanel.handleQuiz(d, i);
@@ -290,8 +286,10 @@ public class MainFrame extends JFrame implements RequestToFrame {
 	 */
 	@Override
 	public void requestLearnModeQuiz(Deck d) {
+		clPanel.remove(quizPanel);
+		this.quizPanel = new LearningQuizPanel(this);
+		clPanel.add(quizPanel, QUIZ);
 		handleQuiz(d, success);
-		// TODO specific display to be done at the end of the quiz.
 	}
 
 	/*
@@ -301,8 +299,10 @@ public class MainFrame extends JFrame implements RequestToFrame {
 	 */
 	@Override
 	public void requestTestModeQuiz(Deck d) {
+		clPanel.remove(quizPanel);
+		this.quizPanel = new TestQuizPanel(this);
+		clPanel.add(quizPanel, QUIZ);
 		handleQuiz(d, 0);
-		// TODO specific display to be done at the end of the quiz!
 	}
 
 	/**
