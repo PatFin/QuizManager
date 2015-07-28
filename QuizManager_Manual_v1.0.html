@@ -51,7 +51,32 @@
 			<li>
 			<a href="#EDITOR">The Quiz Editor</a>
 			<ol>
-				<li><a href="">SEASEZSEZASEZ</a>
+				<li><a href="#firstdeck">Creating your first Deck</a>
+				<ol>
+					<li><a href="#firstdeck:1">Opening the Deck Editor</a></li>
+					<li><a href="#firstdeck:2">Creating your questions</a>
+					<ul>
+						<li><a href="#firstdeck:21">Warning</a></li>
+					</ul>
+					</li>
+					<li><a href="#firstdeck:3">Saving your Deck</a>
+					<ul>
+						<li><a href="#firstdeck:31">Warning!</a>
+					</ul>
+					</li>
+				</ol>
+				</li>
+				<li><a href="#edit">Editing an existing Deck</a>
+				<ul>
+					<li><a href="#edit:1">From the Editor</a></li>
+					<li><a href="#edit:2">From the Player window</a></li>
+				</ul>
+				</li>
+				<li><a href="#menubar">The Editor Menu Bar items</a>
+				<ul>
+					<li><a href="#menubar:1">The File menu</a></li>
+					<li><a href="#menubar:2">The Edit menu</a></li>
+				</ul>
 				</li>
 			</ol>
 		</ol>
@@ -205,9 +230,112 @@
 			<p></p>
 			<ol>
 				<li>
-
-				</li>
-			</ol>
+				<h2 id="firstdeck">Creating your first Deck</h2>
+				<p>You will learn here the few but simple steps to follow to create a deck.
+				</p>
+				<ol>
+					<li><h3 id="firstdeck:1">Opening the Deck Editor</h3>
+					<p>First, you will need to open the Deck Editor. In the window that opens when you launch QuizManager.jar, click on the Edit menu (it is located next to the File menu). Two items now appear:</p>
+					<!-- Insert image here -->
+					<p>Click on the Create Deck item. A new window should appear with the following appearance:
+					</p>
+					<!-- Insert Image here -->
+					</li><!-- End of opening editor -->
+					
+					<li><h3 id="firstdeck:2">Creating your questions</h3>
+					<p>You can see at the top of the window, your question number is displayed. As you are creating a new deck, it should display 'Card 1'. Below are 6 empty fields, each matching a Label. </p>
+					<ul>
+						<li><p>The first field will contain the question. You can enter it by clicking on it and typing your question.</p>
+						</li>
+						<li><p>The second field will contain the correct answer. Try not to mess it up. There is no artificial intelligence checking that what you claim to be the answer to that question is really a good answer. If you screw it up, those who will then use the quiz are going to be confused!
+						</p></li>
+						<li><p>The three following fields are meant to receive the wrong answers to the question. Again try not to put a good answer in one of those field or you will confuse those who will take the quiz after you! </p>
+						</li>
+						
+						<li><p>The last field is a bit larger and is meant to welcome the explanation corresponding to the question. Not that unlike all the other fields you can type on several lines. If you are typing a rather long explanation, do not hesitate to resize the window to display more text! </p>
+						</li>
+					</ul>
+					<p>And that's it! You have created your first question! Now you would ask <em>How do I create the next question?</em> <br />
+					Well it is very simple. At the bottom of the window are two buttons: <em>Prev</em> and <em>Next</em>. Clicking on the Next button will open a new question form and you will be able to fill in the fields just like you just did for your first question! Notice that the card number indicated at the top of the window changes as you press the 'Next' button.</p>
+					<p>If you want to change a question you wrote, click on the 'Prev' button. The text you entered will now appear again and you will be able to modify it. Easy right?</p>
+					<p>If you can't click on the 'Prev' button, it means you already are on the first question, and so, as there are no previous question to the first one, you can't go back.</p>
+					
+					<h4 id="firsdeck:21">Warning!</h4>
+					<p><em>If you do not fill in some of the fields in a question, the program will still work properly and you will be able to save your deck normally. </em></p>
+					<p><strong>But!</strong><em> When you will take a quiz using this deck with empty entries, nothing will be displayed where the empty field was empty in the editor. This might confuse the user. Hence, unless this is your goal, I recommend that you always fill in all the fields whan you create a question.</em></p>
+					</li><!--End of creating questions section -->
+					<li><h3 id="firstdeck:3">Saving you Deck</h3>
+					<p>You have created a bunch of questions (or maybe just one) and you would like to save the deck you've just created in your file system. Doing so is very simple. Here is what you need to do.</p>
+					<p>Click on the file menu in the menu bar at the top of the window. Then click on 'Save Deck'. A file chooser dialog like this one should now appear.</p>
+					<!-- Inseert image here -->
+					<p>You can now explore your folders to find a suitable location for your Deck. Maybe you want to create a new folder that will contain all of them, it's up to personal taste.</p>
+					<h4 id="firstdeck:31">Warning!</h4>
+					<p><em>Whichever name you give to your deck, <strong>please make sure you specified the extension of your file</strong> which should be <strong>.dk</strong>. If you don't save your deck with this format, you will not be able to open it, would you want to play the quiz or edit it.
+					</em></p>
+					<p><em>In the unlikely event where you were to find a file whose extension is .dk but you don't think is a quiz you created or downloaded, <strong>do not re-write it!</strong> It may be a file from another program, and erasing it may cause errors in this other software. 
+					</em></p>
+					</p></em>As far as I know, no program uses the .dk extension but do not take this for granted! If you are aware or if you know a program uses this extension, please share the information by <a href="mailto:finnertypatri@aol.fr" target="_blank">sending me an e-mail</a>. Thank you!
+					</em></p>
+					<p>You can either select an existing file and re-write it. <em>Be careful! You will forever loose the data contained in the file you selected!</em></p>
+					</li><!-- End of Saving your deck -->
+				</ol><!-- End of creating your first deck -->
+				<li><h2 id="edit">Editing an existing deck</h2>
+				<p>Here is how you can open an existing deck file to edit it.
+				</p>
+				<ul>
+					<li><h3 id="edit:1">From the Editor</h3></a>
+					<p>In the menu bar at the top of the window, click on the File menu and then on the 'Open Deck' item. This will open a file chooser dialog to let you choose which file you want to open. Once you have chosen the file you wish to open, the first question of the deck will appear in the window. You can now change the questions as explained <a href="#firsdeck:2">above</a>.
+					<!-- put image here -->
+					</p>
+					</li>
+					<li><h3 id="edit:2">From the Player window</h3>
+					<p>In the menu bar at the top of the window, click on the Edit menu and then on the 'Edit Deck' item. This will open a file chooser dialog that will let you choose which deck you wish to edit. After you have chosen a file, a new Editor window will appear with the deck you selected. Even if you didn't choose any deck, the Editor window will appear but with empty fields. </p>
+					<p>You can then follow the steps described <a href="#firsdeck:2">above</a>.
+					</p>
+					</li>
+				</ul>
+				</li><!--End of editing existing deck -->
+				<li><h2 id="menubar">The Editor Menu Bar items</h2>
+				<p>There are only two menus in the Editor. File and Edit.</p>
+				<ul>
+					<li><h3 id="menubar:1">The File menu</h3>
+					<!-- Insert image here -->
+					<h4 id="menubar:11">Warning!</h4>
+					<p><em>Using any of the File menu item </em>(exept the Save File item)<em> will make you loose all the content you already have in the Editor. All the questions fields you were working on will be cleared without warning. Please <strong>make sure you saved</strong> what you want to keep <strong>before</strong> you press one of these buttons!
+					</em></p>
+					<ul>
+						<li><h5>New Deck</h5>
+						<p>The 'New Deck' item will entirely clear all the fields of the current Deck you are working on. <em>Beware, every question you typed which you haven't saved beforehand will be lost!</em>
+						</p>
+						</li>
+						<li><h5>Open Deck</h5>
+						<p>The 'Open Deck' item will let you open an existing deck in the Editor. You will then be available to change the questions, add some etc. <em>Beware! If you made changes to a deck but didn't save it, and open another deck, all those changes will be lost without warning! Make sure you saved your previous deck before opening an other one! </em>
+						</p>
+						</li>
+						<li><h5>Save Deck</h5>
+						<p>The 'Save Deck' item will open a file chooser dialog to let you save the current content of the Editor. You can refer to the <a href⁼"#firstdeck:3">Save your Deck section</a> above. <em>Make sure you read the <strong>Warning</strong>, it will avoid you getting into trouble!</em>
+						</li>
+					</ul><!-- End of the list of items of file menu -->
+					</li><!-- End of file menu description-->
+					<li><h3 id="menubar:2">The Edit menu</h3>
+					<p>The Edit menu contains two items, <em>Insert question</em> and <em>Remove question</em>.
+					</p>
+					<ul>
+						<li><h5>Insert question</h5>
+						<p>True to its name, the 'Insert question' item will let you insert a question where you are. More accurately, it will push the current question to the next position and create an empty question in the gap. If you press the 'Next' button, you will reach the question you were looking at just before. </p>
+						</li>
+						<li><h5>Remove question</h5>
+						<p>True to its name, this item will remove the question you are currently looking at. If there exists a question after the one you just removed, this next question will be displayed. If not, that is you were at the last question of your deck, the previous question will be displayed. And if your deck contains a single question, it will be cleared. <em>Beware that the question you've just removed will be lost forever. You won't be able to find it again!</em>
+						</p>
+						<p><strong>Note:</strong> if your goal is to remove all the questions currently in your Editor, it will be much quicker to use the File > New Deck item!</p>
+						</li>
+					</ul>
+					</li><!-- End of edit menu description -->
+				</li><!-- End of Editor Menu bar items description -->
+			</ol><!-- End of the DeckEditor section-->
 		</ol><!--End of Ordered list containing the manual main entries -->
+		<hr />
+		<!--	Change the following into a footer ... -->
+		<p>Thanks for reading the manual. If you don't understand something, you can <a href="mailto:finnertypatri@aol.fr?Subject=[Quiz_Manager_Manual] Hey I don't understand ...">ask me</a>! I will then modify this document to make it easier to understand.</p>
 	</body><!-- End of the body :D -->
 </htlm>
