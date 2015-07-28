@@ -3,8 +3,7 @@ This repository contains the files for the java desktop application QuizManager.
 
 <h1>You wish to use the software for your own purposes?</h1>
 
-If you are interested into using the sofware, you can refer to the following page: <a href="http://patfin.github.io/QuizManager">http://patfin.github.io/QuizManager</a>. You will find there a link to download the software and to the user Manual. 
-
+If you are interested into using the sofware, you can refer to the following page: <a href="http://patfin.github.io/QuizManager">http://patfin.github.io/QuizManager</a>. You will find there a link to <a href="http://patfin.github.io/QuizManager#download" target="_blank"> download the software and to the <a href="http://patfin.github.io/QuizManager/QuizManager_Manual_v1.0.html" target="_blank">User Manual</a>. 
 
 <h1>You want the software to do more things?</h1>
 
