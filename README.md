@@ -3,13 +3,12 @@ This repository contains the files for the java desktop application QuizManager.
 
 <h1>You wish to use the software for your own purposes?</h1>
 
-There is an executable Java ARchive (QuizManager.jar) available for download in the <em>Jars</em> folder. Or you can just click on <a href="https://github.com/PatFin/QuizManager/blob/master/Jars/QuizManager.jar?raw=true" target="_blank">this link</a> to download it. You will need the <em>Java Runtime Environment</em> installed on your computer to make it run.
+If you are interested into using the sofware, you can refer to the following page: <a href="http://patfin.github.io/QuizManager">http://patfin.github.io/QuizManager</a>. You will find there a link to download the software and to the user Manual. 
 
-A user manual is also available in the repository. I hope it is as clear as it can be. Again if you feel something is not right with it or if you don't understand something, do not hesitate to contact me! 
 
 <h1>You want the software to do more things?</h1>
 
-You like the software and maybe even use it, but you found a bug or you wish it could do more things? Feel free to send me an e-mail at: finnertypatri@aol.fr describing whatever goes wrong with the software you have. I will try to answer in the best delays and study the problem you encountered. This is not a guarnantee that I will be able to provide support for the application or that what you would like the software to do will be implemented.
+You like the software and maybe even use it, but you found a bug or you wish it could do more things? Feel free to <a href="mailto:finnertypatri@aol.fr" target="_blank">send me an e-mail</a> describing whatever goes wrong with the software you have. I will try to answer in the best delays and study the problem you encountered. This is not a guarnantee that I will be able to provide support for the application or that what you would like the software to do will be implemented.
 
 <h1>You are an interested Devlopper?</h1>
 
@@ -42,4 +41,4 @@ So far it contains a single class:
 </ul>
 
 <h2>Javadoc</h2>
-You will the JAVADOC in the Quiz/doc/ folder.
+You will find the JAVADOC in the Quiz/doc/ folder.
