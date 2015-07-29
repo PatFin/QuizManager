@@ -1,6 +1,7 @@
 package display;
 
 import java.awt.CardLayout;
+import java.awt.Desktop;
 import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -8,6 +9,8 @@ import java.awt.event.KeyEvent;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
+import java.net.MalformedURLException;
+import java.net.URL;
 
 import javax.swing.JFileChooser;
 import javax.swing.JFrame;
@@ -48,13 +51,17 @@ import fileHandler.DeckWriter;
  */
 public class MainFrame extends JFrame implements RequestToFrame {
 
+	
+	private URL manualURL;
+	public final String QMmanual = "http://patfin.github.io/QuizManager/QuizManager_Manual_v1.0.html#QM";
+	
 	private static final long serialVersionUID = -5564000254022541818L;
 
 	private int success;
 
 	private JMenuBar menuBar;
 	private JMenu fileMenu, editMenu, preferencesMenu, aboutMenu;
-	private JMenuItem loadDeckItem, createDeckItem, editDeckItem, optionItem, creditsItem;
+	private JMenuItem loadDeckItem, createDeckItem, editDeckItem, optionItem, creditsItem, userManualItem;
 
 	private QuizPanel quizPanel;
 	private MessagePanel message;
@@ -75,6 +82,12 @@ public class MainFrame extends JFrame implements RequestToFrame {
 		this.setPreferredSize(new Dimension(500, 600));
 		this.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
 
+		try {
+			manualURL = new URL(QMmanual);
+		} catch (MalformedURLException e) {
+			e.printStackTrace();
+		}
+		
 		jMenuBarInit();
 
 		clPanel = new JPanel();
@@ -151,8 +164,14 @@ public class MainFrame extends JFrame implements RequestToFrame {
 		creditsItem = new JMenuItem("Credits", KeyEvent.VK_C);
 		creditsItem.getAccessibleContext().setAccessibleDescription("Read the credits");
 		creditsItem.addActionListener(new MenuListener());
+		
+		userManualItem = new JMenuItem("User Manual", KeyEvent.VK_M);
+		userManualItem.getAccessibleContext().setAccessibleDescription("Open the user manual in your browser");
+		userManualItem.addActionListener(new MenuListener());
+		
 		aboutMenu.add(creditsItem);
-
+		aboutMenu.add(userManualItem);
+		
 		menuBar.add(fileMenu);
 		menuBar.add(editMenu);
 		menuBar.add(preferencesMenu);
@@ -255,7 +274,7 @@ public class MainFrame extends JFrame implements RequestToFrame {
 					} catch (NumberFormatException exception) {
 						JOptionPane.showMessageDialog(null,
 								"You should specify an integer, your input is not valid.\n"
-										+ "The number of good answers needed is not changed: " + success,
+										+ "The number of good answers needed was not changed: " + success,
 								"Warning", JOptionPane.WARNING_MESSAGE);
 					}
 				}
@@ -265,6 +284,16 @@ public class MainFrame extends JFrame implements RequestToFrame {
 				new Credits();
 			}
 
+			if (source == userManualItem) {
+				Desktop desktop = Desktop.isDesktopSupported() ? Desktop.getDesktop() : null;
+			    if (desktop != null && desktop.isSupported(Desktop.Action.BROWSE)) {
+			        try {
+			            desktop.browse(manualURL.toURI());
+			        } catch (Exception exc) {
+			            exc.printStackTrace();
+			        }
+			    }
+			}
 		}
 	}
 

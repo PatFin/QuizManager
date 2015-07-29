@@ -1,6 +1,7 @@
 package display;
 
 import java.awt.BorderLayout;
+import java.awt.Desktop;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.GridLayout;
@@ -11,6 +12,8 @@ import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
 import java.io.FileWriter;
+import java.net.MalformedURLException;
+import java.net.URL;
 
 import javax.swing.JButton;
 import javax.swing.JFileChooser;
@@ -58,6 +61,9 @@ public class DeckEditor extends JFrame {
 	 */
 	private static final long serialVersionUID = -6703163134409694786L;
 
+	private URL manualURL;
+	public final String editorManual = "http://patfin.github.io/QuizManager/QuizManager_Manual_v1.0.html#EDITOR";
+	
 	private Deck deck;
 	private DeckEle currentDeckEle;
 
@@ -91,8 +97,8 @@ public class DeckEditor extends JFrame {
 	private JPanel total = new JPanel();
 
 	private JMenuBar menuBar;
-	private JMenu fileMenu, editMenu;
-	private JMenuItem newDeck, openDeck, saveDeck, insertQuestion, removeQuestion;
+	private JMenu fileMenu, editMenu, aboutMenu;
+	private JMenuItem newDeck, openDeck, saveDeck, insertQuestion, removeQuestion, creditsItem, userManualItem;
 
 	/**
 	 * Constructor No parameter needed.
@@ -102,6 +108,12 @@ public class DeckEditor extends JFrame {
 		this.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
 		this.setLayout(new BorderLayout());
 
+		try {
+			manualURL = new URL(editorManual);
+		} catch (MalformedURLException e) {
+			e.printStackTrace();
+		}
+		
 		// Creating the menuBar
 		menuBarInit();
 
@@ -193,6 +205,22 @@ public class DeckEditor extends JFrame {
 		removeQuestion = new JMenuItem("Remove Question", KeyEvent.VK_R);
 		removeQuestion.addActionListener(new MenuListener());
 		editMenu.add(removeQuestion);
+		
+		//Creating the About menu
+		aboutMenu = new JMenu("About");
+		aboutMenu.setMnemonic(KeyEvent.VK_A);
+		menuBar.add(aboutMenu);
+		
+		creditsItem = new JMenuItem("Credits", KeyEvent.VK_C);
+		creditsItem.getAccessibleContext().setAccessibleDescription("Read the credits");
+		creditsItem.addActionListener(new MenuListener());
+		aboutMenu.add(creditsItem);
+		
+		userManualItem = new JMenuItem("User Manual", KeyEvent.VK_M);
+		userManualItem.getAccessibleContext().setAccessibleDescription("Open the user manual in your browser");
+		userManualItem.addActionListener(new MenuListener());
+		aboutMenu.add(userManualItem);
+		
 	}
 
 	/**
@@ -373,6 +401,21 @@ public class DeckEditor extends JFrame {
 				updateTitle();
 				loadDeckElement(currentDeckEle);
 			}
+			
+			if (o == creditsItem) {
+				new Credits();
+			}
+
+			if (o == userManualItem) {
+				Desktop desktop = Desktop.isDesktopSupported() ? Desktop.getDesktop() : null;
+			    if (desktop != null && desktop.isSupported(Desktop.Action.BROWSE)) {
+			        try {
+			            desktop.browse(manualURL.toURI());
+			        } catch (Exception exc) {
+			            exc.printStackTrace();
+			        }
+			    }
+			}
 		}
 	}
 
@@ -430,7 +473,6 @@ public class DeckEditor extends JFrame {
 				currentCard--;
 				updateTitle();
 			}
-
 		}
 	}
 
