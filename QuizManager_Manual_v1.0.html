@@ -79,6 +79,7 @@
 		</ol>
 		</nav>
 		</div>
+		
 		<div>
 		<section>
 			<h2 id="QM">The Quiz Manager</h2>
@@ -91,20 +92,21 @@
 				<li>
 				<h3 id="QM_firstSteps">Taking your first quiz</h3>
 		
-				<p>Here are the few steps you need to follow to launch a quiz thanks to Quiz Manager.</p>
+				<p>Here are the few steps you need to follow to launch a quiz using Quiz Manager.</p>
 				<ol>
 					<li>
 					<h4 id="QM_firstSteps:1">Launching Quiz Manager</h4>
 					<p>It could seem obvious but well, you need to launch the software first. Usually a double-click on QuizManager.jar wherever you placed it in your file system should be enough. <br />
 					If you haven't downloaded the program yet, you can do so by clicking the following <a href="https://github.com/PatFin/QuizManager/blob/master/Jars/QuizManager.jar?raw=true">link</a>.</p>
 					<p>The following window should now appear:</p>
-
-				<!-- insert image of the window -->
+					<img src="Images/QM_welcome.png" alt="QM_welcome image" style="width:492;height:608;">
 
 					<p>If the window doesn't appear, maybe you haven't installed the latest version of Java Runtime Environment (or JRE for short). You can find instructions on how to install JRE on your computer <a href="https://docs.oracle.com/javase/8/docs/technotes/guides/install/install_overview.html#" target="_blank">here</a>. If after installing JRE and resarting your computer you still don't manage to launch the program then you can try <a href="http://lmgtfy.com/?q=I+can%27t+run+a+jar+file" target="_blank">this</a>. Best of luck! </p>
 					</li>
 					<li>
 					<h4 id="QM_firstSteps:2">Opening a Deck on your file system</h4>			
+					<section class="remark">
+					<h5>What is a Deck?</h5>
 					<p>At this stage you may wonder what we mean by 'Deck'. A Deck is the word we use to describe a series of questions and their answers which Quiz Manager is able to handle. In Quiz Manager, each question contains the following information:</p>
 					<ul>
 						<li>A question</li>
@@ -112,9 +114,9 @@
 						<li>Three wrong answers</li>
 						<li>An explanation</li>
 					</ul>
-					<p>If you want to create your own decks, I sugggest you directly skip to the <a href="#EDITOR">Deck Editor</a> section. If you would like to try Quiz Manager but you don't want to create a deck yourself, you can <a href="https://github.com/PatFin/QuizManager/raw/master/Downloads/Deck%20Example.zip">download one here</a>.</p>
-					
-					<p>To open a deck file located in your files, you need to go into the 'File' menu located at the top left corner of the window. You then need to click on the item labeled as 'Load Deck'.</p>
+					<p>If you want to create your own decks, I sugggest you directly skip to the <a href="#EDITOR">Deck Editor</a> section. If you want to try Quiz Manager but you don't want to create a deck yourself, you can <a href="https://github.com/PatFin/QuizManager/raw/master/Downloads/Deck%20Example.zip">download one here</a>.</p>
+					</section><!-- End of remark -->
+					<p>To open a deck located in your file system, you need to go into the 'File' menu located at the top left corner of the window. You then have to click on the item labeled as 'Load Deck'.</p>
 					<p>As an alternative you can use the following keyboard shortcuts: 
 					<ol>
 						<li>Alt + F to open the 'File' Menu.</li>
@@ -122,7 +124,9 @@
 					</ol>
 					<p>A file chooser dialog will open. It should look like this:
 					</p>
-					<!-- Image of the file chooser -->
+					
+					<img src="Images/QM_openingdeck.png" alt="QM_fileChooser" style="width:519;height:364;">
+					
 					<p>You can now browse your file in search of a deck file. Those files end with a '.dk' extension. You can use the filter of the file chooser to choose to display either all your files or only the folders and the deck files to make the search easier.
 					</p>
 					<p>
@@ -133,7 +137,7 @@
 					<h3 id="QM_firstSteps:3">Choosing a Quiz mode</h3>
 					<p>This step is simple, it is about being able to click on a button.</p> 
 					<p>You are probably more interested in the difference between the different choices that appear on your screen:</p>
-					<!-- Insert image of the choice here -->
+					<img src="Images/QM_modechoice.png" alt="QM_modechoice" style="width:492;height:608;">
 					<ul>
 						<li>
 						<h5 id="QM_firstSteps:31">Learning mode</h5>
@@ -153,8 +157,8 @@
 						</p>
 						<p>All the questions of the deck will be displayed <em>only once</em>. As soon as you answer a question, the next one is displayed, until the decks runs out of questions.<em> Unlike the learning mode, no explanation is displayed between two questions.</em> A message will then be displayed with your score indicated as follows:
 						</p>
-						<!-- Insert image of the result -->
-						<p>In the example above, 'XX/TT' means the user got XX good answers out of TT questions.
+						<img src="Images/QM_testmode_result.png" alt="Test mode result" style="width:492;height:608;">
+						<p>In the example above, '2/3' means the user got 2 good answers out of 3 questions.
 						</p>
 						</li>
 					</ul>
@@ -164,10 +168,11 @@
 					</p>
 					<ul>
 						<li><h5 id="QM_firstStep:41">Question</h5>
-						<p>When a question is presented to the user, it is displayed like this:
+						<p>When a question is presented to the user, it looks like this:
 						</p>
-						<!--Insert question image -->
-						<p>At the top you have the question. It here reads 'XXXXXXXXXXXXX'. <br />
+						<img src="Images/QM_question.png" alt="QM question" style="width:492;608;">
+						
+						<p>At the top you have the question. It here reads 7&nbsp;+&nbsp;5&nbsp;=&nbsp;? <br />
 						Below are four buttons that each contain a possible answer to the question. The software is programmed such that <em>the position of the good answer changes from a question to another</em>. So always clicking on the same button is basically useless! </p>
 						<p>And then just below you have a 'I don't know' button. Clicking on this button will have the same effect as providing a wrong answer. Hence if you click on this button in <a href="#QM_firstSteps:31">learning mode</a>, it will display the explanation.
 						</p>
@@ -175,8 +180,9 @@
 						<li><h5>Explanation (specific to the learning mode)</h5>
 						<p><em>You will only see the explanation view when running a quiz in learning mode</em>. <br /> 
 						For more details, you can refer to the <a href="#QM_firstSteps:3">Choosing a quiz mode section</a>.</p>
-						<p>When taking a quiz in learning mode, after each answer you provide, you will end up with a display like this one:</p>
-						<!--Insert image of explanation here -->
+						<p>When taking a quiz in learning mode, after each answer you provide, you will end up with a display similar to that one:</p>
+						
+						<img src="Images/QM_explaination.png" alt="QM explanation" style="with:492;height:608;">
 						<p>You can see the question you just answered to is still displayed. But just below it, the answer buttons have been replaced by a text area. The content of this text area will vary, depending on if you provided a right or a wrong answer to the question. 
 						</p>
 						<p>If you were right, the text area will contain a congratulation message. <p>
@@ -220,7 +226,7 @@
 				</ul>
 				</li>
 			</ol>		
-			<a href="">return to top</a>
+			<a href="" style="float:right;">return to top</a>
 			</section> <!-- end of Quiz Manager section -->
 			
 			<section>
@@ -229,19 +235,18 @@
 			<ol>
 				<li>
 				<h3 id="firstdeck">Creating your first Deck</h3>
-				<p>You will learn here the few but simple steps to follow to create a deck.
-				</p>
+				<p>You will learn here the few but simple steps to create a deck.	</p>
 				<ol>
 					<li><h4 id="firstdeck:1">Opening the Deck Editor</h4>
-					<p>First, you will need to open the Deck Editor. In the window that opens when you launch QuizManager.jar, click on the Edit menu (it is located next to the File menu). Two items now appear:</p>
-					<!-- Insert image here -->
+					<p>First, you will need to open the Deck Editor. In the window that opens when you launch QuizManager.jar, click on the Edit menu (it is located next to the File menu). Two items now appear.</p>
 					<p>Click on the Create Deck item. A new window should appear with the following appearance:
 					</p>
-					<!-- Insert Image here -->
+					
+					<img src="Images/Editor_empty.png" alt="Editor (empty)" style="width:568;height:242;">
 					</li><!-- End of opening editor -->
 					
 					<li><h4 id="firstdeck:2">Creating your questions</h4>
-					<p>You can see at the top of the window, your question number is displayed. As you are creating a new deck, it should display 'Card 1'. Below are 6 empty fields, each matching a Label. </p>
+					<p>You can see at the top of the window, your question number is displayed. As you are creating a new deck, you should be reading 'Card 1'. Below are 6 empty fields, each matching a Label. </p>
 					<ul>
 						<li><p>The first field will contain <em>the question</em>. You can enter it by clicking on it and typing your question.</p>
 						</li>
@@ -253,27 +258,33 @@
 						</li>
 					</ul>
 					<p>And that's it! You have created your first question! Now you would ask: </p> 
-					<p><em>How do I create the next question? </em></p>
+					<div class="remark">
+					<h5>How do I create the next question? </h5>
 					<p>Well it is <em>very simple</em>. At the bottom of the window are two buttons: <em>Prev</em> and <em>Next</em>. <br />
-					Clicking on the Next button will open a new question form and you will be able to fill in the fields just like you just did for your first question! Notice that the card number indicated at the top of the window changes as you press the 'Next' button.</p>
+					Clicking on the Next button will open a new question form and you will be able to fill in the fields just like you just did for your first question! </p>
+					<p>Notice that the card number indicated at the top of the window changes as you press the 'Next' button.</p>
 					<p>If you want to change a question you wrote, click on the 'Prev' button. The text you entered will now appear again and you will be able to modify it. </p>
 					<p>If you can't click on the 'Prev' button, it means you already are on the first question, and so, as there are no previous question to the first one, you can't go back.</p>
-					
+					</div><!--End of remark -->
+					<div class="warning">
 					<h5 id="firstdeck:21">Warning</h5>
-					<p><em>If you do not fill in some of the fields in a question, the program will still work properly and you will be able to save your deck normally. </em></p>
-					<p><strong>But!</strong><em> When you will take a quiz using this deck with empty entries, nothing will be displayed where the empty field was empty in the editor. This might confuse the user. Hence, unless this is your goal, I recommend that you always fill in all the fields whan you create a question.</em></p>
+					<p>If you do not fill in some of the fields in a question, the program will still work properly and you will be able to save your deck normally. </p>
+					<p><strong>But!</strong> When you will take a quiz using this deck with empty entries, nothing will be displayed where the empty field was empty in the editor. This might confuse the user. Hence, unless this is your goal, I recommend that you always fill in all the fields whan you create a question.</p>
+					</div><!--End of warning -->
 					</li><!--End of creating questions section -->
 					<li><h4 id="firstdeck:3">Saving you Deck</h4>
 					<p>You have created a bunch of questions (or maybe just one) and you would like to save the deck you've just created in your file system. Doing so is very simple. Here is what you need to do.</p>
 					<p>Click on the file menu in the menu bar at the top of the window. Then click on 'Save Deck'. A file chooser dialog like this one should now appear.</p>
 					<!-- Inseert image here -->
 					<p>You can now explore your folders to find a suitable location for your Deck. Maybe you want to create a new folder that will contain all of them, it's up to personal taste.</p>
+					<div class="warning">
 					<h5 id="firstdeck:31">Warning!</h5>
-					<p><em>Whichever name you give to your deck, <strong>please make sure you specified the extension of your file</strong> which should be <strong>.dk</strong>. If you don't save your deck with this format, you will not be able to open it, would you want to play the quiz or edit it.
-					</em></p>
-					<p><em>In the unlikely event where you were to <strong>find a file</strong> whose extension is .dk <strong>but you don't think is a quiz</strong> you created or downloaded, <strong>do not re-write it!</strong> It may be a file from another program, and erasing it may cause errors in this other software. 
-					</em></p>
+					<p>Whichever name you give to your deck, <strong>please make sure you specified the extension of your file</strong> which should be <strong>.dk</strong>. If you don't save your deck with this format, you will not be able to open it, would you want to play the quiz or edit it.
+					</p>
+					<p>In the unlikely event where you were to <strong>find a file</strong> whose extension is .dk <strong>but you don't think is a quiz</strong> you created or downloaded, <strong>do not re-write it!</strong> It may be a file from another program, and erasing it may cause errors in this other software. 
+					</p>
 					<p>As far as I know, no program uses the .dk extension but do not take this for granted! If you are aware or if you know a program uses this extension, please share the information by <a href="mailto:finnertypatri@aol.fr" target="_blank">sending me an e-mail</a>. Thank you!</p>
+					</div><!--End of warning -->
 					<p>You can either select an existing file and re-write it. <em>Be careful! You will forever loose the data contained in the file you selected!</em></p>
 					</li><!-- End of Saving your deck -->
 				</ol><!-- End of creating your first deck -->
@@ -298,9 +309,11 @@
 				<ul>
 					<li><h4 id="menubar:1">The File menu</h4>
 					<!-- Insert image here -->
+					<div class="warning">
 					<h4 id="menubar:11">Warning!</h4>
-					<p><em>Using any of the File menu item </em>(exept the Save File item)<em> will make you loose all the content you already have in the Editor. All the questions fields you were working on will be cleared without warning. Please <strong>make sure you saved</strong> what you want to keep <strong>before</strong> you press one of these buttons!
-					</em></p>
+					<p>Using any of the File menu item (exept the Save File item) will make you loose all the content you already have in the Editor. All the questions fields you were working on will be cleared without warning. Please <strong>make sure you saved</strong> what you want to keep <strong>before</strong> you press one of these buttons!
+					</p>
+					</div><!--End of warning -->
 					<ul>
 						<li><h6>New Deck</h6>
 						<p>The 'New Deck' item will entirely clear all the fields of the current Deck you are working on. <em>Beware, every question you typed which you haven't saved beforehand will be lost!</em>
@@ -344,15 +357,14 @@
 					</li>
 				</ul><!-- End of Editor Menu bar items description -->
 			</ol><!-- End of the DeckEditor section-->
-			<a href="">return to top</a>
+			<a href="" style="float:right;">return to top</a>
 		</section><!--End of section containing the Editor entries -->
-		
+		</div><!-- End of div containing the QM and the Editor section -->
 		<div id="footer">
 		<footer>
 		<p>Document published under the <a href="http://www.gnu.org/licenses/fdl.html" target="_blank">GNU Free Documentation License</a>.</p>
 		</footer>
 		</div>
-		</div><!-- end of div wrapper -->
 		<!-- End of the body :D -->
 	</body>
 </html>
