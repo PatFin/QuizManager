@@ -1,6 +1,6 @@
 # QuizManager
 This repository contains the files for the java desktop application QuizManager.
-You are in the dev brach of the project.
+You are in the dev branch of the project.
 
 <h2>You wish to use or download the software?</h2>
 
