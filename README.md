@@ -1,24 +1,30 @@
 # QuizManager
 This repository contains the files for the java desktop application QuizManager.
+We are currently at version 1.0 of the software.
 
-<h1>You wish to use the software for your own purposes?</h1>
+<h2>You wish to use or download the software</h2>
 
-If you are interested into using the sofware, you can refer to the following page: <a href="http://patfin.github.io/QuizManager">http://patfin.github.io/QuizManager</a>. You will find there a link to <a href="http://patfin.github.io/QuizManager/#download" target="_blank">download the software</a> and to the <a href="http://patfin.github.io/QuizManager/QuizManager_Manual_v1.0.html" target="_blank">User Manual</a>. 
+You can go to the project page http://patfin.github.io/QuizManager !
+You should find enough information there. 
 
-<h1>You want the software to do more things?</h1>
+<h2>You are an interested Devlopper?</h2>
 
-You like the software and maybe even use it, but you found a bug or you wish it could do more things? Feel free to <a href="mailto:finnertypatri@aol.fr" target="_blank">send me an e-mail</a> describing whatever goes wrong with the software you have. I will try to answer in the best delays and study the problem you encountered. This is not a guarnantee that I will be able to provide support for the application or that what you would like the software to do will be implemented.
+You can either fork this project and do your own stuff with it.
 
-<h1>You are an interested Devlopper?</h1>
+Or you can try to go into the dev branch and see what will be coming soon and what is left to do!
 
-If you wish to access the soure code, you can do so by going into the Quiz/src Folder. It contains 3 packages:
+<h3>package organisation in the main branch</h3>
+
+<h3>Javadoc</h3>
+You will find the JAVADOC in the Quiz/doc/ folder.
+
 <ul>
 <li>deck</li>
 <li>display</li>
 <li>fileHandler</li>
 </ul>
 
-<h2>Package deck</h2> 
+<h4>Package deck</h4> 
 It contains the classes that deals with a quiz as an object. 
 <ul>
 <li>Classes Deck and DeckEle consist of a kind of linkedList used to easily manage a quiz. </li>
@@ -26,18 +32,15 @@ It contains the classes that deals with a quiz as an object.
 <li>Class DeckFileFilter extends FileFilter and is used when a JFileChooser is opened to let the user choose a deck file. </li>
 </ul>
 
-<h2>Package display</h2> 
+<h4>Package display</h4> 
 It contains all the classes used to manage the display of the application.
 <ul>
 <li>MainFrame is (true to its name) the main frame of the application. It uses a CardLayout to alternatively display several Panels. <em>It contains a main method that launches a QuizManager window.</em></li>
 <li>DeckEditor is the JFrame that handles the editing of decks. <em>It contains a main method that launches a QuizManager window.</em></li>
 </ul>
 
-<h2>Package fileHandler</h2> 
+<h4>Package fileHandler</h4> 
 So far it contains a single class:
 <ul>
 <li>Class DeckWriter is the class capable of converting a Deck object into a text writable in a file. It also contains a method capable of converting a text (from a file) into a Deck object (if formated correctly). </li>
 </ul>
-
-<h2>Javadoc</h2>
-You will find the JAVADOC in the Quiz/doc/ folder.
