@@ -2,7 +2,7 @@
 This repository contains the files for the java desktop application QuizManager.
 We are currently at version 1.0 of the software.
 
-<h2>You wish to use or download the software</h2>
+<h2>You wish to use or download the software?</h2>
 
 You can go to the project page http://patfin.github.io/QuizManager !
 You should find enough information there. 
@@ -13,10 +13,10 @@ You can either fork this project and do your own stuff with it.
 
 Or you can try to go into the dev branch and see what will be coming soon and what is left to do!
 
-<h3>package organisation in the main branch</h3>
-
 <h3>Javadoc</h3>
 You will find the JAVADOC in the Quiz/doc/ folder.
+
+<h3>package organisation in the main branch</h3>
 
 <ul>
 <li>deck</li>
