@@ -20,7 +20,6 @@ import javax.swing.JMenuItem;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
-import editor.DeckEditor;
 import util.Credits;
 import util.Deck;
 import util.DeckFileFilter;
@@ -62,8 +61,8 @@ public class MainFrame extends JFrame implements RequestToFrame {
 	private int success;
 
 	private JMenuBar menuBar;
-	private JMenu fileMenu, editMenu, preferencesMenu, aboutMenu;
-	private JMenuItem loadDeckItem, createDeckItem, editDeckItem, optionItem, creditsItem, userManualItem;
+	private JMenu fileMenu, preferencesMenu, aboutMenu;
+	private JMenuItem loadDeckItem, optionItem, creditsItem, userManualItem;
 
 	private QuizPanel quizPanel;
 	private MessagePanel message;
@@ -133,22 +132,6 @@ public class MainFrame extends JFrame implements RequestToFrame {
 		loadDeckItem.addActionListener(new MenuListener());
 		fileMenu.add(loadDeckItem);
 
-		// Creating Edit menu
-		editMenu = new JMenu("Edit");
-		editMenu.setMnemonic(KeyEvent.VK_E);
-		editMenu.getAccessibleContext().setAccessibleDescription("Menu for all editing purposes");
-
-		createDeckItem = new JMenuItem("Create Deck", KeyEvent.VK_C);
-		createDeckItem.getAccessibleContext()
-				.setAccessibleDescription("Create a new deck with the build-in interface.");
-		createDeckItem.addActionListener(new MenuListener());
-		editMenu.add(createDeckItem);
-
-		editDeckItem = new JMenuItem("Edit Deck", KeyEvent.VK_E);
-		editDeckItem.getAccessibleContext().setAccessibleDescription("Load an existing deck into the editor");
-		editDeckItem.addActionListener(new MenuListener());
-		editMenu.add(editDeckItem);
-
 		// Creating Preferences menu
 		preferencesMenu = new JMenu("Preferences");
 		preferencesMenu.setMnemonic(KeyEvent.VK_P);
@@ -179,7 +162,6 @@ public class MainFrame extends JFrame implements RequestToFrame {
 		aboutMenu.add(userManualItem);
 		
 		menuBar.add(fileMenu);
-		menuBar.add(editMenu);
 		menuBar.add(preferencesMenu);
 		menuBar.add(aboutMenu);
 		this.setJMenuBar(menuBar);
@@ -253,20 +235,6 @@ public class MainFrame extends JFrame implements RequestToFrame {
 				return;
 			}
 
-			/**
-			 * Launches a new deck editor window.
-			 */
-			if (source == createDeckItem) {
-				new DeckEditor().setVisible(true);
-				;
-				return;
-			}
-
-			if (source == editDeckItem) {
-				DeckEditor dE = new DeckEditor();
-				dE.openDeck();
-				dE.setVisible(true);
-			}
 
 			if (source == optionItem) {
 				System.out.println("option clicked!");
