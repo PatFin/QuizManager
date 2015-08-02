@@ -21,9 +21,10 @@ You should find enough information there.
 <ul>
 <li>- [ ] Implement a warning against unsaved document when the user is about to remove all the current fields (on New Deck option for instance</li>
 <li>- [ ] Implement an overview system to allow the user to see all the questions at once</li>
-<li>- [ ] Implement a question check upon file saving. Warn the user that some questions are empty and propose removal of those</li>
+<li>- [X] Implement a question check upon file saving. Warn the user that some questions are empty and propose removal of those</li>
 <li>- [ ] Add a toolbar to the editor (with the possibility to hide it in Preferences menu) with buttons for question insert and removal, deck save options and so on ...</li>
-<li>...</li>
+<li>- [X] Add a message on save indicating success</li>
+<li>- [ ] ...</li>
 </ul>
 
 <h4>in the Player</h4>
