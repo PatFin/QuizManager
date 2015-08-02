@@ -79,6 +79,24 @@ public class DeckEle {
 	}
 
 	/**
+	 * Indicates if at least one of the question field is empty.
+	 * Careful, this will throw an NullPointerException if the question of this DeckEle hasn't been initialised.
+	 * @return true if a field of the question is empty, false otherwise.
+	 */
+	public boolean hasEmptyFieldInQuestion () {
+		boolean wrong = false;
+		for (int i=0; i<question.wrong.length; i++) {
+			if (question.wrong[i].isEmpty()) {
+				wrong = true;
+				break;
+			}
+		}
+		
+		return question.answer.isEmpty() || question.explanation.isEmpty() || question.question.isEmpty() || wrong;
+	}
+	
+	
+	/**
 	 * Sets the question contained by the element to the question provided as
 	 * argument.
 	 * 

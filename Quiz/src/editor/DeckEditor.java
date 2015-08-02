@@ -1,6 +1,7 @@
 package editor;
 
 import java.awt.BorderLayout;
+import java.awt.Component;
 import java.awt.Desktop;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
@@ -14,6 +15,7 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.util.ArrayList;
 
 import javax.swing.JButton;
 import javax.swing.JFileChooser;
@@ -22,6 +24,7 @@ import javax.swing.JLabel;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
@@ -274,11 +277,11 @@ public class DeckEditor extends JFrame {
 				}
 				buffReader.close();
 			} catch (Exception error) {
-				System.out.println("An error occured while reading the file. It may be corrupted."); // TODO
-																										// put
-																										// a
-																										// popup
-																										// window
+				System.out.println("An error occured while reading the file. It may be corrupted."); // 
+				JOptionPane.showMessageDialog(null,
+						"An error occured while reading the file.\n"
+								+ "It may be corrupted.",
+						"Error", JOptionPane.ERROR_MESSAGE);
 				return;
 			}
 
@@ -295,6 +298,67 @@ public class DeckEditor extends JFrame {
 	 */
 	private void updateTitle() {
 		title.setText("Card " + currentCard);
+	}
+	
+	/**
+	 * Checks the current content of the editor for empty fields in some questions.
+	 * @return an array containing the card numbers where there is a problem.
+	 */
+	private ArrayList<DeckEle> checkEmptyQuestion () {
+		ArrayList<DeckEle> issues = new  ArrayList <DeckEle> ();
+		
+		// First we create the deck object.
+		deck = new Deck();
+		// We go back to the first deckElement
+		DeckEle buff = currentDeckEle;
+		while (buff.hasPrev()) {
+			buff = buff.getPrevious();
+		}
+		// We set the root to be the first DeckElement!
+		deck.setRoot(buff);
+		
+		//We go through all the elements checking if there are emtpy fields, if so we add them to the ArrayList.
+		while (buff.hasNext()) {
+			if (buff.hasEmptyFieldInQuestion()) {
+				issues.add(buff);
+			}
+			buff = buff.getNext();
+		}
+		if(buff.hasEmptyFieldInQuestion()) {
+			issues.add(buff);
+		}
+		
+		return issues;
+	}
+	
+	
+	/**
+	 * This method saves the current deck to a file chosen by the user thanks to the JFileChooser.
+	 * It is recommended to check the current deck for empty questions beforehand to avoid saving useless stuff.
+	 * @see #checkEmptyQuestions
+	 */
+	private void saveDeck () {
+		// Now the JFileChooser
+		JFileChooser fs = new JFileChooser(new File("c:\\user"));
+		fs.setDialogTitle("Save current Deck");
+		fs.setFileFilter(new DeckFileFilter());
+
+		if (fs.showSaveDialog(null) == JFileChooser.APPROVE_OPTION) {
+			String s = DeckWriter.deckToString(deck);
+			File file = fs.getSelectedFile();
+			try {
+				FileWriter fw = new FileWriter(file.getPath());
+				fw.write(s);
+				fw.flush();
+				fw.close();
+				JOptionPane.showMessageDialog((Component) null, "Deck "+file.getName()+" saved successfully",
+				        "Save complete", JOptionPane.INFORMATION_MESSAGE);
+			} catch (Exception error) {
+				error.printStackTrace();
+				JOptionPane.showMessageDialog((Component) null, "Save - Error",
+				        "An error occured while saving "+file.getName()+".", JOptionPane.WARNING_MESSAGE);
+			}
+		}
 	}
 
 	/**
@@ -322,6 +386,7 @@ public class DeckEditor extends JFrame {
 				return;
 			}
 
+			//If open deck was clicked
 			if (o == openDeck) {
 				openDeck();
 				return;
@@ -332,34 +397,47 @@ public class DeckEditor extends JFrame {
 				currentDeckEle.setQuestion(new Question(queT.getText(), ansT.getText(),
 						new String[] { wro1T.getText(), wro2T.getText(), wro3T.getText() }, explT.getText()));
 
-				// First we create the deck object.
-				deck = new Deck();
-				// We go back to the first deckElement
-				DeckEle buff = currentDeckEle;
-				while (buff.hasPrev()) {
-					buff = buff.getPrevious();
-				}
-				// We set the root to be the first DeckElement!
-				deck.setRoot(buff);
-
-				// Now the JFileChooser
-				JFileChooser fs = new JFileChooser(new File("c:\\user"));
-				fs.setDialogTitle("Save current Deck");
-				fs.setFileFilter(new DeckFileFilter());
-
-				if (fs.showSaveDialog(null) == JFileChooser.APPROVE_OPTION) {
-					String s = DeckWriter.deckToString(deck);
-					File file = fs.getSelectedFile();
-					try {
-						FileWriter fw = new FileWriter(file.getPath());
-						fw.write(s);
-						fw.flush();
-						fw.close();
-					} catch (Exception error) {
-						error.printStackTrace();
+				//We check the current deck for empty questions and ask the user if he wants to remove those, keep them or cancel.
+				ArrayList <DeckEle> issues = checkEmptyQuestion();
+				switch (issues.size()) {
+				case 0:
+					saveDeck();
+					return;
+				default:
+					//Propose to remove those questions, or save anyway or cancel.
+					System.out.println(issues.size() + " Questions have empty fields in the current DeckEditor session.");
+					
+					//TODO open a dialog, switch on the result.
+					int result = JOptionPane.showConfirmDialog((Component) null, "Some questions have empt fields. \nWould you like to remove those before saving?","Warning - Empty fields", JOptionPane.YES_NO_CANCEL_OPTION);
+					System.out.println(result);
+					switch (result) {
+					case 0: //remove questions + save
+						DeckEle d = deck.getRoot();
+						while (issues.contains(d) && d != null) {
+							d=d.getNext();
+						}
+						if (d == null) {
+							return; //Display error no questions to save ..?
+						}
+						d.setPrevious(null);
+						deck.setRoot(d);
+						
+						DeckEle b = d;
+						while (b.hasNext()){
+							b = b.getNext();
+							if (!issues.contains(b)) {
+								d.setNext(b);
+								d=b;
+							}
+						}
+					case 1: //save directly
+						deck.rewind();
+						saveDeck();
+						break;
+					default:	//Cancel 
+						return;
 					}
 				}
-				return;
 			}
 
 			// The current element gets pushed to the right and a new (and

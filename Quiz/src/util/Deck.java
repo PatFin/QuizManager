@@ -107,6 +107,23 @@ public class Deck {
 		}
 		return a;
 	}
+	
+	/**
+	 * Gives an arrayList of all the questions the deck contains.
+	 * @return ArrayList<DeckEle> of DeckEle contained by this.
+	 */
+	public ArrayList<DeckEle> getAllDeckEle () {
+		ArrayList<DeckEle> a = new ArrayList<DeckEle>();
+		this.rewind();
+		DeckEle e = root;
+		if (e != null) {
+			while (e != null) {
+				a.add(e);
+				e = e.next;
+			}
+		}
+		return a;
+	}
 
 	/**
 	 * Moves the root to the next element. The current root is therefore lost
