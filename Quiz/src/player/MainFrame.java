@@ -20,6 +20,7 @@ import javax.swing.JMenuItem;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
+import util.ConfigWriter;
 import util.Credits;
 import util.Deck;
 import util.DeckFileFilter;
@@ -94,9 +95,9 @@ public class MainFrame extends JFrame implements RequestToFrame {
 		clPanel = new JPanel();
 		clPanel.setLayout(new CardLayout(1, 1));
 		
-		//TODO implement a read / write preferences method
-		LearningQuizPanel.successNeededForMearningMode = 3;
+		LearningQuizPanel.successNeededForMearningMode = 3; //Default values in case loading the preferences doesn't work
 		LearningQuizPanel.failuresNeededForLearningMode = 3;
+		ConfigWriter.loadPreferences();
 		
 		this.quizPanel = new LearningQuizPanel(this);
 		this.message = new MessagePanel("");
@@ -235,9 +236,8 @@ public class MainFrame extends JFrame implements RequestToFrame {
 				return;
 			}
 
-
+			//TODO modify to have the failures input aswell.
 			if (source == optionItem) {
-				System.out.println("option clicked!");
 
 				String s = (String) JOptionPane.showInputDialog(null,
 						"Number of good answers to pass\n" + "a question in Learning mode", "Preferences",
@@ -250,8 +250,10 @@ public class MainFrame extends JFrame implements RequestToFrame {
 								"You should specify an integer, your input is not valid.\n"
 										+ "The number of good answers needed was not changed: " + LearningQuizPanel.successNeededForMearningMode,
 								"Warning", JOptionPane.WARNING_MESSAGE);
+						return;
 					}
 				}
+				ConfigWriter.savePreferences();
 			}
 
 			if (source == creditsItem) {
@@ -338,7 +340,7 @@ public class MainFrame extends JFrame implements RequestToFrame {
 		try {
 			clPanel.remove(endQuiz);
 		} catch (Exception e) {
-			System.out.println("There were no endQuiz panel to be removed");
+			//System.out.println("There were no endQuiz panel to be removed");
 		}
 		this.endQuiz = new EndQuizPanel (total, diff, message, this);
 		clPanel.add(endQuiz,ENDQUIZ);
