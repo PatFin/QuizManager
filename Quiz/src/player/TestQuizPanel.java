@@ -1,7 +1,5 @@
 package player;
 
-import util.Deck;
-
 @SuppressWarnings("serial")
 public class TestQuizPanel extends QuizPanel {
 
@@ -16,12 +14,6 @@ public class TestQuizPanel extends QuizPanel {
 		super(o);
 	}
 
-	public void handleQuiz (Deck d, int s) {
-		this.goodAnswers = 0;
-		this.nbQuestions = 0;
-		
-		super.handleQuiz(d, s);
-	}
 	/*
 	 * (non-Javadoc)
 	 * @see display.QuizPanel#showAnswer(boolean)
@@ -31,15 +23,21 @@ public class TestQuizPanel extends QuizPanel {
 		if(goodAnswer){
 			this.goodAnswers++;
 		} else {
-			difficult.addQuestion(current.getCurrentQuestion());
+			difficult.addQuestion(currentDeck.getCurrentQuestion());
 		}
 		nbQuestions++;
 		
-		if (current.noQuestionLeft()) {
-			container.requestEndQuiz(current, difficult, "Congratulations, you have finished this deck! Score: "+goodAnswers+"/"+nbQuestions);
+		if (currentDeck.noQuestionLeft()) {
+			endQuiz();
 		} else {
-			setQuestion(current.next());
+			setQuestion(currentDeck.next());
 		}
+	}
+
+	@Override
+	public void endQuiz() {
+		container.requestEndQuiz(originalDeck, difficult, "Congratulations, you have finished this deck! Score: "+goodAnswers+"/"+nbQuestions);
+
 	}
 
 }

@@ -58,8 +58,6 @@ public class MainFrame extends JFrame implements RequestToFrame {
 	
 	private static final long serialVersionUID = -5564000254022541818L;
 
-	private int success;
-
 	private JMenuBar menuBar;
 	private JMenu fileMenu, preferencesMenu, aboutMenu;
 	private JMenuItem loadDeckItem, optionItem, creditsItem, userManualItem;
@@ -96,8 +94,10 @@ public class MainFrame extends JFrame implements RequestToFrame {
 		clPanel = new JPanel();
 		clPanel.setLayout(new CardLayout(1, 1));
 		
-		success = 3;
-
+		//TODO implement a read / write preferences method
+		LearningQuizPanel.successNeededForMearningMode = 3;
+		LearningQuizPanel.failuresNeededForLearningMode = 3;
+		
 		this.quizPanel = new LearningQuizPanel(this);
 		this.message = new MessagePanel("");
 		this.gameModeChoice = new DeckModeChoicePanel(this);
@@ -206,8 +206,8 @@ public class MainFrame extends JFrame implements RequestToFrame {
 	 * @param d the quiz to be launched
 	 * @param i the number of times the card needs to be answered properly before it is not added anymore at the end of the deck
 	 */
-	private void handleQuiz(Deck d, int i) {
-		this.quizPanel.handleQuiz(d, i);
+	private void handleQuiz(Deck d) {
+		this.quizPanel.handleQuiz(d);
 		this.show(MainFrame.QUIZ);
 	}
 
@@ -241,14 +241,14 @@ public class MainFrame extends JFrame implements RequestToFrame {
 
 				String s = (String) JOptionPane.showInputDialog(null,
 						"Number of good answers to pass\n" + "a question in Learning mode", "Preferences",
-						JOptionPane.PLAIN_MESSAGE, null, null, success);
+						JOptionPane.PLAIN_MESSAGE, null, null, LearningQuizPanel.successNeededForMearningMode);
 				if (s != null) {
 					try {
-						success = Integer.parseInt(s);
+						LearningQuizPanel.successNeededForMearningMode = Integer.parseInt(s);
 					} catch (NumberFormatException exception) {
 						JOptionPane.showMessageDialog(null,
 								"You should specify an integer, your input is not valid.\n"
-										+ "The number of good answers needed was not changed: " + success,
+										+ "The number of good answers needed was not changed: " + LearningQuizPanel.successNeededForMearningMode,
 								"Warning", JOptionPane.WARNING_MESSAGE);
 					}
 				}
@@ -292,7 +292,7 @@ public class MainFrame extends JFrame implements RequestToFrame {
 		clPanel.remove(quizPanel);
 		this.quizPanel = new LearningQuizPanel(this);
 		clPanel.add(quizPanel, QUIZ);
-		handleQuiz(d, success);
+		handleQuiz(d);
 	}
 
 	/*
@@ -305,7 +305,7 @@ public class MainFrame extends JFrame implements RequestToFrame {
 		clPanel.remove(quizPanel);
 		this.quizPanel = new TestQuizPanel(this);
 		clPanel.add(quizPanel, QUIZ);
-		handleQuiz(d, 0);
+		handleQuiz(d);
 	}
 
 	/**
@@ -352,6 +352,6 @@ public class MainFrame extends JFrame implements RequestToFrame {
 
 	@Override
 	public void requestQuizSameType(Deck d) {
-		handleQuiz(d, success);
+		handleQuiz(d);
 	}
 }

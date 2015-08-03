@@ -54,8 +54,18 @@ public abstract class QuizPanel extends javax.swing.JPanel implements AnswerProv
 
 	protected QuizState state;
 
-	protected Deck current;
-	protected int success;
+	/**
+	 * The deck which is used for the quiz. It can get extra questions as the deck goes on.
+	 */
+	protected Deck currentDeck;
+	
+	/**
+	 * The deck which was given to handle the quiz. 
+	 * It is kept until the end of the quiz when it is asked for the
+	 * user if they want to do it again.
+	 */
+	protected Deck originalDeck;
+	
 	protected RequestToFrame container;
 	
 	protected Deck difficult; 
@@ -91,10 +101,10 @@ public abstract class QuizPanel extends javax.swing.JPanel implements AnswerProv
 					showAnswer(false);
 					break;
 				case ANSWER:
-					if (current.noQuestionLeft()) {
-						container.requestEndQuiz(current, difficult, "Congratulations, you have finished this deck!");
+					if (currentDeck.noQuestionLeft()) {
+						container.requestEndQuiz(currentDeck, difficult, "Congratulations, you have finished this deck!");
 					} else {
-						setQuestion(current.next());
+						setQuestion(currentDeck.next());
 					}
 				}
 			}
@@ -132,11 +142,14 @@ public abstract class QuizPanel extends javax.swing.JPanel implements AnswerProv
 
 	/**
 	 * Handles what is to be done when an answer has been provided
-	 * 
 	 * @param goodAnswer
 	 */
 	public abstract void showAnswer(boolean goodAnswer);
 
+	/**
+	 * Defines what is to be done when the deck reaches its last card.
+	 */
+	public abstract void endQuiz();
 	/**
 	 * Launches a new quiz with the deck given as parameter. All the cards in
 	 * the deck will be seen. If the number of success to a question is lower
@@ -149,14 +162,18 @@ public abstract class QuizPanel extends javax.swing.JPanel implements AnswerProv
 	 * @param d the deck which is going to be studied
 	 * @param s the number of times a card needs to be answered correctly for it not to be added again at the end of the deck
 	 */
-	public void handleQuiz(Deck d, int s) {
-		d.rewind();
-		this.difficult = new Deck ();
-		if (d.resetSuccess() == 0) {
-			this.current = d;
-			this.success = s;
-			setQuestion(current.getCurrentQuestion());
-		} else {
+	public void handleQuiz(Deck d) {
+		try {
+			d.rewind();
+			this.originalDeck = d;
+			this.difficult = new Deck ();
+			//We create a copy of the deck
+			this.currentDeck = new Deck();
+			for (Question q : d.getAllQuestions()) {
+				currentDeck.addQuestion(q);
+			}
+			setQuestion(currentDeck.getCurrentQuestion());
+		} catch (Exception exc) {
 			container.requestMessage("Invalid deck provided");
 		}
 
