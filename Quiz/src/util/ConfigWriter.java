@@ -18,7 +18,7 @@ public class ConfigWriter {
 	public final static String success = "[Success]:=";
 	public final static String fail = "[Failures]:=";
 	
-	public final static String path = "Config/Preferences.cf";
+	public final static String path = "Preferences.cf";
 	
 	/**
 	 * Allows to save the values of the LearningModeQuiz
