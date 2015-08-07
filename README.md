@@ -32,7 +32,7 @@ You should find enough information there.
 <li>- [X] Propose an option after a quiz to repeat the quiz with only the questions on which the user had trouble getting the right answer
 <p>In Learning mode -> Put questions with more than X nb of wrong answers, in Test mode -> Put the questions to which the user gave a wrong answer.</p>
 </li>
-<li>- [ ] Add a preferences save system</li>
+<li>- [X] Add a preferences save system</li>
 <li>- [ ] Add nb failures to add question to difficult in Learning mode to Preferences options.</li>
 <li>...</li>
 </ul>
