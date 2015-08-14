@@ -8,7 +8,6 @@ import java.awt.GridBagLayout;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.event.KeyEvent;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
@@ -21,9 +20,7 @@ import javax.swing.JButton;
 import javax.swing.JFileChooser;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
-import javax.swing.JMenu;
 import javax.swing.JMenuBar;
-import javax.swing.JMenuItem;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
@@ -56,7 +53,7 @@ import util.*;
  *         You should have received a copy of the GNU General Public License
  *         along with this program. If not, see <http://www.gnu.org/licenses/>.
  */
-public class DeckEditor extends JFrame {
+public class DeckEditor extends JFrame implements EditorListener{
 
 	/**
 	 * Generated serialVersionUID
@@ -99,8 +96,7 @@ public class DeckEditor extends JFrame {
 	private JPanel total = new JPanel();
 
 	private JMenuBar menuBar;
-	private JMenu fileMenu, editMenu, aboutMenu;
-	private JMenuItem newDeck, openDeck, saveDeck, insertQuestion, removeQuestion, creditsItem, userManualItem;
+	
 
 	/**
 	 * Constructor No parameter needed.
@@ -116,8 +112,9 @@ public class DeckEditor extends JFrame {
 			e.printStackTrace();
 		}
 		
-		// Creating the menuBar
-		menuBarInit();
+		//Adding the menu bar.
+		this.menuBar = new EditorMenuBar(this);
+		this.setJMenuBar(menuBar);
 
 		// Putting the elements into the frame
 		total.setLayout(new GridBagLayout());
@@ -170,60 +167,6 @@ public class DeckEditor extends JFrame {
 		this.setMinimumSize(this.getSize());
 	}
 
-	/**
-	 * Creates the MenuBar. Method called only in the constructor.
-	 */
-	private void menuBarInit() {
-		// Create the menubar
-		menuBar = new JMenuBar();
-		this.setJMenuBar(menuBar);
-
-		// Create the file menu
-		fileMenu = new JMenu("File");
-		fileMenu.setMnemonic(KeyEvent.VK_F);
-		menuBar.add(fileMenu);
-
-		newDeck = new JMenuItem("New Deck", KeyEvent.VK_N);
-		newDeck.addActionListener(new MenuListener());
-		fileMenu.add(newDeck);
-
-		openDeck = new JMenuItem("Open Deck", KeyEvent.VK_O);
-		openDeck.addActionListener(new MenuListener());
-		fileMenu.add(openDeck);
-
-		saveDeck = new JMenuItem("Save Deck", KeyEvent.VK_S);
-		saveDeck.addActionListener(new MenuListener());
-		fileMenu.add(saveDeck);
-
-		// Create the edit menu
-		editMenu = new JMenu("Edit");
-		editMenu.setMnemonic(KeyEvent.VK_E);
-		menuBar.add(editMenu);
-
-		insertQuestion = new JMenuItem("Insert Question", KeyEvent.VK_I);
-		insertQuestion.addActionListener(new MenuListener());
-		editMenu.add(insertQuestion);
-
-		removeQuestion = new JMenuItem("Remove Question", KeyEvent.VK_R);
-		removeQuestion.addActionListener(new MenuListener());
-		editMenu.add(removeQuestion);
-		
-		//Creating the About menu
-		aboutMenu = new JMenu("About");
-		aboutMenu.setMnemonic(KeyEvent.VK_A);
-		menuBar.add(aboutMenu);
-		
-		creditsItem = new JMenuItem("Credits", KeyEvent.VK_C);
-		creditsItem.getAccessibleContext().setAccessibleDescription("Read the credits");
-		creditsItem.addActionListener(new MenuListener());
-		aboutMenu.add(creditsItem);
-		
-		userManualItem = new JMenuItem("User Manual", KeyEvent.VK_M);
-		userManualItem.getAccessibleContext().setAccessibleDescription("Open the user manual in your browser");
-		userManualItem.addActionListener(new MenuListener());
-		aboutMenu.add(userManualItem);
-		
-	}
 
 	/**
 	 * Clears all the questions and sets a new one.
@@ -304,7 +247,7 @@ public class DeckEditor extends JFrame {
 	 * Checks the current content of the editor for empty fields in some questions.
 	 * @return an array containing the card numbers where there is a problem.
 	 */
-	private ArrayList<DeckEle> checkEmptyQuestion () {
+	public ArrayList<DeckEle> checkEmptyQuestion () {
 		ArrayList<DeckEle> issues = new  ArrayList <DeckEle> ();
 		
 		// First we create the deck object.
@@ -337,7 +280,7 @@ public class DeckEditor extends JFrame {
 	 * It is recommended to check the current deck for empty questions beforehand to avoid saving useless stuff.
 	 * @see #checkEmptyQuestions
 	 */
-	private void saveDeck () {
+	public void saveDeck () {
 		// Now the JFileChooser
 		JFileChooser fs = new JFileChooser(new File("c:\\user"));
 		fs.setDialogTitle("Save current Deck");
@@ -360,142 +303,130 @@ public class DeckEditor extends JFrame {
 			}
 		}
 	}
-
+	
 	/**
-	 * This class handles the MenuBar events and defines what to do with each
-	 * JMenuItem. If any other button was being added, it should be added as
-	 * ActionListener this private class, unless of course if that system was to
-	 * change which is entirely possible !
-	 * 
-	 * @author Patrick
+	 * Saves the current content of the fields to the current DeckEle.
 	 */
-	private class MenuListener implements ActionListener {
+	public void storeCurrentQuestion () {
+		currentDeckEle.setQuestion(new Question(queT.getText(), ansT.getText(),
+				new String[] { wro1T.getText(), wro2T.getText(), wro3T.getText() }, explT.getText()));
 
-		/*
-		 * (non-Javadoc)
-		 * 
-		 * @see java.awt.event.ActionListener#actionPerformed(java.awt.event.
-		 * ActionEvent)
-		 */
-		public void actionPerformed(ActionEvent e) {
-			Object o = e.getSource();
+	}
 
-			// If newDeck was pressed
-			if (o == newDeck) {
-				newDeck();
-				return;
+	/*
+	 * (non-Javadoc)
+	 * @see editor.EditorListener#insertQuestion()
+	 */
+	@Override
+	public void insertQuestion () {
+		DeckEle insert = new DeckEle(new Question());
+
+		if (currentDeckEle.hasPrev()) {
+			insert.setPrevious(currentDeckEle.getPrevious());
+		}
+		insert.setNext(currentDeckEle);
+
+		loadDeckElement(currentDeckEle = insert);
+	}
+	
+	/*
+	 * (non-Javadoc)
+	 * @see editor.EditorListener#removeQuestion()
+	 */
+	@Override
+	public void removeQuestion() {
+		if (currentDeckEle.hasNext()) {
+			if (currentDeckEle.hasPrev()) {
+				currentDeckEle.getPrevious().setNext(currentDeckEle.getNext());
+				currentDeckEle = currentDeckEle.getNext();
+			} else {
+				currentDeckEle.getNext().setPrevious(null);
+				currentDeckEle = currentDeckEle.getNext();
 			}
-
-			//If open deck was clicked
-			if (o == openDeck) {
-				openDeck();
-				return;
-			}
-
-			if (o == saveDeck) {
-				// We store the last element created!
-				currentDeckEle.setQuestion(new Question(queT.getText(), ansT.getText(),
-						new String[] { wro1T.getText(), wro2T.getText(), wro3T.getText() }, explT.getText()));
-
-				//We check the current deck for empty questions and ask the user if he wants to remove those, keep them or cancel.
-				ArrayList <DeckEle> issues = checkEmptyQuestion();
-				switch (issues.size()) {
-				case 0:
-					saveDeck();
-					return;
-				default:
-					//Propose to remove those questions, or save anyway or cancel.
-					System.out.println(issues.size() + " Questions have empty fields in the current DeckEditor session.");
-					
-					//TODO open a dialog, switch on the result.
-					int result = JOptionPane.showConfirmDialog((Component) null, "Some questions have empt fields. \nWould you like to remove those before saving?","Warning - Empty fields", JOptionPane.YES_NO_CANCEL_OPTION);
-					System.out.println(result);
-					switch (result) {
-					case 0: //remove questions + save
-						DeckEle d = deck.getRoot();
-						while (issues.contains(d) && d != null) {
-							d=d.getNext();
-						}
-						if (d == null) {
-							return; //Display error no questions to save ..?
-						}
-						d.setPrevious(null);
-						deck.setRoot(d);
-						
-						DeckEle b = d;
-						while (b.hasNext()){
-							b = b.getNext();
-							if (!issues.contains(b)) {
-								d.setNext(b);
-								d=b;
-							}
-						}
-					case 1: //save directly
-						deck.rewind();
-						saveDeck();
-						break;
-					default:	//Cancel 
-						return;
-					}
+		} else {
+			if (currentDeckEle.hasPrev()) {
+				currentDeckEle = currentDeckEle.getPrevious();
+				currentDeckEle.setNext(null);
+				currentCard--;
+				if (!currentDeckEle.hasPrev()) {
+					prev.setEnabled(false);
 				}
+			} else {
+				currentDeckEle = new DeckEle(new Question());
 			}
-
-			// The current element gets pushed to the right and a new (and
-			// empty) question is loaded
-			if (o == insertQuestion) {
-				DeckEle insert = new DeckEle(new Question());
-
-				if (currentDeckEle.hasPrev()) {
-					insert.setPrevious(currentDeckEle.getPrevious());
-				}
-				insert.setNext(currentDeckEle);
-
-				loadDeckElement(currentDeckEle = insert);
-				return;
-			}
-
-			if (o == removeQuestion) {
-				if (currentDeckEle.hasNext()) {
-					if (currentDeckEle.hasPrev()) {
-						currentDeckEle.getPrevious().setNext(currentDeckEle.getNext());
-						currentDeckEle = currentDeckEle.getNext();
-					} else {
-						currentDeckEle.getNext().setPrevious(null);
-						currentDeckEle = currentDeckEle.getNext();
-					}
-				} else {
-					if (currentDeckEle.hasPrev()) {
-						currentDeckEle = currentDeckEle.getPrevious();
-						currentDeckEle.setNext(null);
-						currentCard--;
-						if (!currentDeckEle.hasPrev()) {
-							prev.setEnabled(false);
-						}
-					} else {
-						currentDeckEle = new DeckEle(new Question());
-					}
-				}
-				updateTitle();
-				loadDeckElement(currentDeckEle);
-			}
+		}
+		updateTitle();
+		loadDeckElement(currentDeckEle);
+	}
+	
+	/*
+	 * (non-Javadoc)
+	 * @see editor.EditorListener#openManual()
+	 */
+	@Override
+	public void openManual() {
+		Desktop desktop = Desktop.isDesktopSupported() ? Desktop.getDesktop() : null;
+	    if (desktop != null && desktop.isSupported(Desktop.Action.BROWSE)) {
+	        try {
+	            desktop.browse(manualURL.toURI());
+	        } catch (Exception exc) {
+	            exc.printStackTrace();
+	        }
+	    }
+	}
+	
+	/*
+	 * (non-Javadoc)
+	 * @see editor.EditorListener#removeEmptyQuestionDialogAndSave()
+	 */
+	@Override
+	public void removeEmptyQuestionDialogAndSave () {
+		// We store the last element created!
+		storeCurrentQuestion();
+		
+		//We check the current deck for empty questions and ask the user if he wants to remove those, keep them or cancel.
+		ArrayList <DeckEle> issues = checkEmptyQuestion();
+		switch (issues.size()) {
+		case 0:
+			saveDeck();
+			return;
+		default:
+			//Propose to remove those questions, or save anyway or cancel.
+			System.out.println(issues.size() + " Questions have empty fields in the current DeckEditor session.");
 			
-			if (o == creditsItem) {
-				new Credits();
-			}
-
-			if (o == userManualItem) {
-				Desktop desktop = Desktop.isDesktopSupported() ? Desktop.getDesktop() : null;
-			    if (desktop != null && desktop.isSupported(Desktop.Action.BROWSE)) {
-			        try {
-			            desktop.browse(manualURL.toURI());
-			        } catch (Exception exc) {
-			            exc.printStackTrace();
-			        }
-			    }
+			//open a dialog, switch on the result.
+			int result = JOptionPane.showConfirmDialog((Component) null, "Some questions have empt fields. \nWould you like to remove those before saving?","Warning - Empty fields", JOptionPane.YES_NO_CANCEL_OPTION);
+			System.out.println(result);
+			switch (result) {
+			case 0: //remove questions + save
+				DeckEle d = deck.getRoot();
+				while (issues.contains(d) && d != null) {
+					d=d.getNext();
+				}
+				if (d == null) {
+					return; //Display error no questions to save ..?
+				}
+				d.setPrevious(null);
+				deck.setRoot(d);
+				
+				DeckEle b = d;
+				while (b.hasNext()){
+					b = b.getNext();
+					if (!issues.contains(b)) {
+						d.setNext(b);
+						d=b;
+					}
+				}
+			case 1: //save directly
+				deck.rewind();
+				saveDeck();
+				break;
+			default:	//Cancel 
+				return;
 			}
 		}
 	}
-
+	
 	/**
 	 * This private class handles the behaviour of the two buttons contained by
 	 * the window. There are two buttons in the interface (text being Prev and
@@ -516,9 +447,8 @@ public class DeckEditor extends JFrame {
 		 */
 		@Override
 		public void actionPerformed(ActionEvent e) {
-			currentDeckEle.setQuestion(new Question(queT.getText(), ansT.getText(),
-					new String[] { wro1T.getText(), wro2T.getText(), wro3T.getText() }, explT.getText()));
-
+			storeCurrentQuestion();
+			
 			Object o = e.getSource();
 			// If next button was pressed
 			if (o == next) {
@@ -560,7 +490,6 @@ public class DeckEditor extends JFrame {
 	 */
 	public static void main(String[] args) {
 		new DeckEditor().setVisible(true);
-		;
 	}
 
 }
