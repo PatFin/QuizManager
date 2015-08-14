@@ -74,6 +74,7 @@ public class MainFrame extends JFrame implements RequestToFrame {
 	final static String MODE = "mode";
 	final static String ENDQUIZ = "end";
 
+	private final SettingsWindow settings;
 	/**
 	 * Constructor No parameters needed. Will lead to a blank window with only a
 	 * welcome message
@@ -114,6 +115,8 @@ public class MainFrame extends JFrame implements RequestToFrame {
 		message.setSize(d);
 		quizPanel.setSize(d);
 		gameModeChoice.setSize(d);
+		
+		settings = new SettingsWindow();
 	}
 
 	/**
@@ -238,22 +241,8 @@ public class MainFrame extends JFrame implements RequestToFrame {
 
 			//TODO modify to have the failures input aswell.
 			if (source == optionItem) {
-
-				String s = (String) JOptionPane.showInputDialog(null,
-						"Number of good answers to pass\n" + "a question in Learning mode", "Preferences",
-						JOptionPane.PLAIN_MESSAGE, null, null, LearningQuizPanel.successNeededForMearningMode);
-				if (s != null) {
-					try {
-						LearningQuizPanel.successNeededForMearningMode = Integer.parseInt(s);
-					} catch (NumberFormatException exception) {
-						JOptionPane.showMessageDialog(null,
-								"You should specify an integer, your input is not valid.\n"
-										+ "The number of good answers needed was not changed: " + LearningQuizPanel.successNeededForMearningMode,
-								"Warning", JOptionPane.WARNING_MESSAGE);
-						return;
-					}
-				}
-				ConfigWriter.savePreferences();
+				settings.refreshValues();
+				settings.setVisible(true);
 			}
 
 			if (source == creditsItem) {

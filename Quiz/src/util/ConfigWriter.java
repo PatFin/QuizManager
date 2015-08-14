@@ -38,7 +38,9 @@ public class ConfigWriter {
 			        "An error occured while saving your preferences. \nThis is mostly harmless but modified configuration might not be there \n next time you launch the software.", JOptionPane.WARNING_MESSAGE);
 			return;
 		}
-		System.out.println("Preferences saved successfully");
+		System.out.println("Preferences saved:");
+		System.out.println("Success:"+s);
+		System.out.println("Failures:"+f);
 	}
 	
 	
