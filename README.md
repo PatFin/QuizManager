@@ -33,6 +33,6 @@ You should find enough information there.
 <p>In Learning mode -> Put questions with more than X nb of wrong answers, in Test mode -> Put the questions to which the user gave a wrong answer.</p>
 </li>
 <li>- [X] Add a preferences save system</li>
-<li>- [ ] Add nb failures to add question to difficult in Learning mode to Preferences options.</li>
-<li>...</li>
+<li>- [X] Add nb failures to add question to difficult in Learning mode to Preferences options.</li>
+<li>- [ ] ...</li>
 </ul>
