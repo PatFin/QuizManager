@@ -72,4 +72,41 @@ public class Question {
 	public String toString() {
 		return question;
 	}
+
+	/**
+	 * Returns true if all the fields of the two questions are identical.
+	 * This is not a a == b check, it is a real parameter by parameter check.
+	 * If either one of the parameters is null, this method will return false.
+	 * @param a a question
+	 * @param b	an other question
+	 * @return true if the questions contain the same Strings, false otherwise.
+	 * @see Util#compareString(String, String)
+	 */
+	public static boolean areIdentical(Question a, Question b) {
+		if (a!= null && b != null) {
+			return Util.compareString(a.question, b.question) && 
+					Util.compareString(a.answer, b.answer) && 
+					Util.compareString(a.explanation, b.explanation) &&
+					Util.compareString(a.wrong[0], b.wrong[0]) &&
+					Util.compareString(a.wrong[1], b.wrong[1]) &&
+					Util.compareString(a.wrong[2], b.wrong[2]);
+		} else {
+			return false;
+		}
+	}
+	
+	/**
+	 * Main method for testing ... :D
+	 * @param args nothing needed!
+	 */
+	public static void main (String [] args) {
+		Question q1 = new Question("Q", "a", new String [] {"a","a","a"}, "Blof");
+		
+		Question q2 = new Question("Q", "a", new String [] {"a","a","a"}, "Blof");
+		q1 = null;
+		q2 = null;
+		
+		
+		System.out.println(areIdentical(q1, q2));
+	}
 }

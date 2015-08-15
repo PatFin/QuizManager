@@ -56,7 +56,11 @@ public class Deck {
 	 * @return true if deck contains no question, false otherwise.
 	 */
 	public boolean isEmpty () {
-		return !root.hasQuestion();
+		try {
+			return Question.areIdentical(root.question, new Question());
+		} catch (NullPointerException e) {
+			return false;
+		}
 	}
 	/**
 	 * Adds the question given as parameter at the end of the list
@@ -88,18 +92,17 @@ public class Deck {
 
 	/**
 	 * Gives an ArrayList containing all the different questions contained by
-	 * the deck. Multiple occurrences of a question in a deck will not appear in
-	 * the list returned The list will not contain null questions. But a
-	 * question might have been poorly initialised properly.
-	 * 
-	 * @return the list of all different questions contained in the deck.
+	 * the deck. Multiple occurrences of a question in a deck will appear in
+	 * the list returned. The list will not contain any null questions. 
+	 * But a question might have been poorly initialised.
+	 * @return the list of all questions contained in the deck.
 	 */
 	public ArrayList<Question> getAllQuestions() {
 		ArrayList<Question> a = new ArrayList<Question>();
 		DeckEle e = root;
 		if (e != null) {
 			while (e != null) {
-				if (!a.contains(e.question) && e.question != null) {
+				if (e.question != null) {
 					a.add(e.question);
 				}
 				e = e.next;
@@ -202,5 +205,71 @@ public class Deck {
 	 */
 	public DeckEle getRoot() {
 		return this.root;
+	}
+	
+	/**
+	 * Gives the number of DeckElement contained in the deck.
+	 * If the deck is empty, will return 0.
+	 * @return the number of DeckEle contained in the deck.
+	 */
+	public int size () {
+		int c = 0;
+		
+		if(!this.isEmpty()) {
+			this.rewind();
+			
+			while (root.hasNext()) {
+				c++;
+				this.next();
+			}
+		}
+		
+		return c;
+	}
+
+	/**
+	 * Indicated if two decks are identical, that is if every single one of their questions are the same.
+	 * Providing at least one null parameter will return false.
+	 * @param a a deck
+	 * @param b an other deck
+	 * @return true if a and b contain the same questions, false otherwise or if either one or both of them are null
+	 */
+	public static boolean areIdentical(Deck a, Deck b) {
+		try {
+			a.rewind();
+			b.rewind();
+		} catch (NullPointerException e) {
+			return false;
+		}
+		
+		Object [] l1 = a.getAllQuestions().toArray();
+		Object [] l2 = b.getAllQuestions().toArray();
+		
+		if (l1.length == l2.length ) {
+			for (int i=0; i<l1.length; i++) {
+				if (!Question.areIdentical((Question)l1[i],(Question) l2[i])) {
+					return false;
+				}
+			}
+		} else {
+			return false;
+		}
+		
+		return true;
+	}
+	
+	public static void main (String [] args) {
+		Question q1 = new Question("Q", "a", new String [] {"a","a","a"}, "Blof");
+		Question q2 = new Question("Q", "a", new String [] {"a","a","a"}, "Blof");
+		
+		Deck d1 = new Deck();
+		d1.addQuestion(q2);
+		d1.addQuestion(q2);
+		
+		Deck d2 = new Deck();
+		d2.addQuestion(q1);
+		d2.addQuestion(q2);
+		
+		System.out.println(areIdentical(d1, d2));
 	}
 }

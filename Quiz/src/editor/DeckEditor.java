@@ -65,6 +65,7 @@ public class DeckEditor extends JFrame implements EditorListener{
 	
 	private Deck deck;
 	private DeckEle currentDeckEle;
+	private Deck lastSavedDeck = new Deck();
 
 	private int currentCard;
 
@@ -177,6 +178,7 @@ public class DeckEditor extends JFrame implements EditorListener{
 		currentCard = 1;
 		prev.setEnabled(false);
 		updateTitle();
+		rememberLastDeck(new Deck());
 	}
 
 	/**
@@ -199,6 +201,18 @@ public class DeckEditor extends JFrame implements EditorListener{
 		this.explT.setText(q.explanation);
 	}
 
+	/**
+	 * Copies the deck given as parameter and stores it into the lastDeck field
+	 * @param d the deck that was last saved.
+	 */
+	public void rememberLastDeck (Deck d) {
+		this.lastSavedDeck = new Deck ();
+		
+		for (Question q : d.getAllQuestions()) {
+			lastSavedDeck.addQuestion(q);
+		}
+	}
+	
 	/**
 	 * Opens a deck in the editor from a file which will be chosen by the user
 	 * via a JFileChooser
@@ -231,13 +245,14 @@ public class DeckEditor extends JFrame implements EditorListener{
 			Deck d = DeckWriter.stringToDeck(totalFile);
 			newDeck();
 			loadDeckElement(currentDeckEle = d.getRoot());
+			rememberLastDeck(d);
 		}
 	}
 
 	/**
-	 * Updates the index of the card shown at the top of the editor. To be
-	 * called whenever the value of currentCard changes. TODO find a better
-	 * 'cleaner' way to update the text -> adding an index to class DeckEle ?
+	 * Updates the index of the card shown at the top of the editor. 
+	 * To be called whenever the value of currentCard changes. 
+	 * TODO find a better'cleaner' way to update the text -> adding an index to class DeckEle ?
 	 */
 	private void updateTitle() {
 		title.setText("Card " + currentCard);
@@ -250,15 +265,11 @@ public class DeckEditor extends JFrame implements EditorListener{
 	public ArrayList<DeckEle> checkEmptyQuestion () {
 		ArrayList<DeckEle> issues = new  ArrayList <DeckEle> ();
 		
-		// First we create the deck object.
-		deck = new Deck();
 		// We go back to the first deckElement
 		DeckEle buff = currentDeckEle;
 		while (buff.hasPrev()) {
 			buff = buff.getPrevious();
 		}
-		// We set the root to be the first DeckElement!
-		deck.setRoot(buff);
 		
 		//We go through all the elements checking if there are emtpy fields, if so we add them to the ArrayList.
 		while (buff.hasNext()) {
@@ -282,11 +293,15 @@ public class DeckEditor extends JFrame implements EditorListener{
 	 */
 	public void saveDeck () {
 		// Now the JFileChooser
+		this.deck.setRoot(currentDeckEle);
+		deck.rewind();
+		
 		JFileChooser fs = new JFileChooser(new File("c:\\user"));
 		fs.setDialogTitle("Save current Deck");
 		fs.setFileFilter(new DeckFileFilter());
 
 		if (fs.showSaveDialog(null) == JFileChooser.APPROVE_OPTION) {
+			rememberLastDeck(deck);
 			String s = DeckWriter.deckToString(deck);
 			File file = fs.getSelectedFile();
 			try {
@@ -296,6 +311,7 @@ public class DeckEditor extends JFrame implements EditorListener{
 				fw.close();
 				JOptionPane.showMessageDialog((Component) null, "Deck "+file.getName()+" saved successfully",
 				        "Save complete", JOptionPane.INFORMATION_MESSAGE);
+				this.lastSavedDeck = this.deck;
 			} catch (Exception error) {
 				error.printStackTrace();
 				JOptionPane.showMessageDialog((Component) null, "Save - Error",
@@ -381,9 +397,6 @@ public class DeckEditor extends JFrame implements EditorListener{
 	 */
 	@Override
 	public void removeEmptyQuestionDialogAndSave () {
-		// We store the last element created!
-		storeCurrentQuestion();
-		
 		//We check the current deck for empty questions and ask the user if he wants to remove those, keep them or cancel.
 		ArrayList <DeckEle> issues = checkEmptyQuestion();
 		switch (issues.size()) {
@@ -395,17 +408,24 @@ public class DeckEditor extends JFrame implements EditorListener{
 			System.out.println(issues.size() + " Questions have empty fields in the current DeckEditor session.");
 			
 			//open a dialog, switch on the result.
-			int result = JOptionPane.showConfirmDialog((Component) null, "Some questions have empt fields. \nWould you like to remove those before saving?","Warning - Empty fields", JOptionPane.YES_NO_CANCEL_OPTION);
+			int result = JOptionPane.showConfirmDialog((Component) null, "Some questions have empty fields. \nWould you like to remove those before saving?","Warning - Empty fields", JOptionPane.YES_NO_CANCEL_OPTION);
 			System.out.println(result);
 			switch (result) {
 			case 0: //remove questions + save
+				deck = new Deck();
+				deck.setRoot(currentDeckEle);
+				deck.rewind();
 				DeckEle d = deck.getRoot();
 				while (issues.contains(d) && d != null) {
 					d=d.getNext();
 				}
+				
+				//If the deck is empty, show a dialog saying so.
 				if (d == null) {
-					return; //Display error no questions to save ..?
+					JOptionPane.showMessageDialog((Component) null, "There are no questions to save.\nNo file was saved.", "Empty Deck", JOptionPane.INFORMATION_MESSAGE);
+					return;
 				}
+				
 				d.setPrevious(null);
 				deck.setRoot(d);
 				
@@ -483,6 +503,34 @@ public class DeckEditor extends JFrame implements EditorListener{
 		}
 	}
 
+	//TODO find the bug!
+	/*
+	 * (non-Javadoc)
+	 * @see editor.EditorListener#checkForUnsavedContent()
+	 */
+	@Override
+	public int checkForUnsavedContent() {
+		deck = new Deck();
+		deck.setRoot(currentDeckEle);
+		deck.rewind();
+		//TODO take care of the null exception
+		
+		if (!Deck.areIdentical(deck, lastSavedDeck) && !deck.isEmpty()) {
+			//Pop-up a dialog asking if one wants to save or what.
+			int result = JOptionPane.showConfirmDialog((Component) null, "Your current Deck Editor contains modifications that were not saved.\nWould you like to save those before continuing?","Warning - Unsaved Content", JOptionPane.YES_NO_CANCEL_OPTION);
+			switch (result) {
+			case JOptionPane.YES_OPTION: 
+				return 1;
+			case JOptionPane.NO_OPTION:
+				return 2;
+			default: 
+				return 3;
+			}
+		} else {
+			return 0;
+		}
+	}
+	
 	/**
 	 * Launches a new DeckEditor
 	 * 

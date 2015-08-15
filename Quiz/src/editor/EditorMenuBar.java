@@ -8,6 +8,8 @@ import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 
+import util.Credits;
+
 @SuppressWarnings("serial")
 public class EditorMenuBar extends JMenuBar {
 
@@ -90,17 +92,37 @@ public class EditorMenuBar extends JMenuBar {
 		 * ActionEvent)
 		 */
 		public void actionPerformed(ActionEvent e) {
+			// We store the last element created!
+			listener.storeCurrentQuestion();
+			
 			Object o = e.getSource();
 
 			// If newDeck was pressed
 			if (o == newDeck) {
-				listener.newDeck();
-				return;
+				switch (listener.checkForUnsavedContent()) {
+				case 1:
+					listener.removeEmptyQuestionDialogAndSave();
+				case 2:
+				case 0:
+					listener.newDeck();
+					break;
+				default :
+					return;
+				}
 			}
 
 			//If open deck was clicked
 			if (o == openDeck) {
-				listener.openDeck();
+				switch (listener.checkForUnsavedContent()) {
+				case 1:
+					listener.removeEmptyQuestionDialogAndSave();
+				case 2:
+				case 0:
+					listener.openDeck();
+					break;
+				default :
+					return;
+				}
 			}
 
 			if (o == saveDeck) {
@@ -118,7 +140,7 @@ public class EditorMenuBar extends JMenuBar {
 			}
 			
 			if (o == creditsItem) {
-				listener.openManual();
+				new Credits();
 			}
 
 			if (o == userManualItem) {
