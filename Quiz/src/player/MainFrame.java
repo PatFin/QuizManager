@@ -83,7 +83,7 @@ public class MainFrame extends JFrame implements RequestToFrame {
 		super("Quiz Player 1.1");
 		this.setResizable(true);
 		this.setPreferredSize(new Dimension(500, 600));
-		this.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
+		this.setDefaultCloseOperation(EXIT_ON_CLOSE);
 
 		try {
 			manualURL = new URL(QMmanual);
@@ -108,7 +108,7 @@ public class MainFrame extends JFrame implements RequestToFrame {
 		clPanel.add(gameModeChoice, MODE);
 
 		this.add(clPanel);
-		this.requestMessage("Welcome to Quiz Manager v1.0");
+		this.requestMessage("Welcome to Quiz Player");
 		this.pack();
 		
 		Dimension d = this.getContentPane().getSize();

@@ -104,7 +104,7 @@ public class DeckEditor extends JFrame implements EditorListener{
 	 */
 	public DeckEditor() {
 		super("Deck Editor");
-		this.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
+		this.setDefaultCloseOperation(EXIT_ON_CLOSE);
 		this.setLayout(new BorderLayout());
 
 		try {
