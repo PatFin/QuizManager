@@ -148,12 +148,12 @@ public class SettingsWindow extends JFrame {
 		}
 		if (noError) {
 			JOptionPane.showMessageDialog(null,
-					"Settings saved successfully.",
+					"Settings changed successfully.",
 					"Settings", JOptionPane.INFORMATION_MESSAGE);
 					
 		} else {
 			JOptionPane.showMessageDialog(null,
-					"Settings were not saved: \n"
+					"Settings were not changed: \n"
 					+ "Make sure you enter a number in the text fields!",
 					"Error", JOptionPane.WARNING_MESSAGE);
 		}
@@ -167,7 +167,6 @@ public class SettingsWindow extends JFrame {
 		cancelButton.addActionListener(new ActionListener () {
 			@Override
 			public void actionPerformed (ActionEvent e) {
-				//TODO hide the window
 				setVisible(false);
 			}
 		});
@@ -181,8 +180,7 @@ public class SettingsWindow extends JFrame {
 				//Close the window
 				setVisible(false);
 				saveValuesToMainFrame();
-				ConfigWriter.savePreferences();
-				
+				ConfigWriter.savePrefs();
 			}
 		});
 	}

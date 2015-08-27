@@ -96,9 +96,7 @@ public class MainFrame extends JFrame implements RequestToFrame {
 		clPanel = new JPanel();
 		clPanel.setLayout(new CardLayout(1, 1));
 		
-		LearningQuizPanel.successNeededForMearningMode = 3; //Default values in case loading the preferences doesn't work
-		LearningQuizPanel.failuresNeededForLearningMode = 3;
-		ConfigWriter.loadPreferences();
+		ConfigWriter.loadPrefs();
 		
 		this.quizPanel = new LearningQuizPanel(this);
 		this.message = new MessagePanel("");
@@ -238,17 +236,25 @@ public class MainFrame extends JFrame implements RequestToFrame {
 				loadDeckFromFile();
 				return;
 			}
-
-			//TODO modify to have the failures input aswell.
+			
+			/**
+			 * Launches a the settings window.
+			 */
 			if (source == optionItem) {
 				settings.refreshValues();
 				settings.setVisible(true);
 			}
 
+			/**
+			 * Launches a new Credits window
+			 */
 			if (source == creditsItem) {
 				new Credits();
 			}
 
+			/**
+			 * Attempts to launch a new tab in the browser, displayiing the user manual page.
+			 */
 			if (source == userManualItem) {
 				Desktop desktop = Desktop.isDesktopSupported() ? Desktop.getDesktop() : null;
 			    if (desktop != null && desktop.isSupported(Desktop.Action.BROWSE)) {
@@ -264,7 +270,6 @@ public class MainFrame extends JFrame implements RequestToFrame {
 
 	/*
 	 * (non-Javadoc)
-	 * 
 	 * @see display.RequestToFrame#requestMessage(java.lang.String)
 	 */
 	@Override
@@ -275,7 +280,6 @@ public class MainFrame extends JFrame implements RequestToFrame {
 
 	/*
 	 * (non-Javadoc)
-	 * 
 	 * @see display.RequestToFrame#requestLearnModeQuiz(deck.Deck)
 	 */
 	@Override
@@ -288,7 +292,6 @@ public class MainFrame extends JFrame implements RequestToFrame {
 
 	/*
 	 * (non-Javadoc)
-	 * 
 	 * @see display.RequestToFrame#requestTestModeQuiz(deck.Deck)
 	 */
 	@Override
@@ -303,7 +306,6 @@ public class MainFrame extends JFrame implements RequestToFrame {
 	 * Make the card layout of the mainFrame display the corresponding card. As
 	 * parameter, the String field should be MESSAGE or QUIZ which are static
 	 * attributes
-	 * 
 	 * @param param
 	 */
 	private void show(String param) {
@@ -336,11 +338,19 @@ public class MainFrame extends JFrame implements RequestToFrame {
 		show(ENDQUIZ);
 	}
 
+	/*
+	 * (non-Javadoc)
+	 * @see player.RequestToFrame#requestLoadOtherQuiz()
+	 */
 	@Override
 	public void requestLoadOtherQuiz() {
 		this.loadDeckFromFile();
 	}
 
+	/*
+	 * (non-Javadoc)
+	 * @see player.RequestToFrame#requestQuizSameType(util.Deck)
+	 */
 	@Override
 	public void requestQuizSameType(Deck d) {
 		handleQuiz(d);
