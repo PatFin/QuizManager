@@ -81,6 +81,7 @@ public class Credits extends JFrame {
 		"You should have received a copy of the GNU General Public License\n"
 				+ "along with this program.  If not, see <http://www.gnu.org/licenses/>.");
 		text.setFont(new Font(text.getFont().getName(), text.getFont().getStyle(), 15));
+		text.setEditable(false);
 		this.setSize(500, 600);
 		this.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
 		this.setVisible(true);

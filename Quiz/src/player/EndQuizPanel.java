@@ -48,6 +48,7 @@ public class EndQuizPanel extends JPanel {
 				"Or you can choose to study only the questions you\n"+
 				"struggled with. Or choose a different deck !\n"+
 				"It's up to you!");
+		this.message.setEditable(false);
 		this.add(message);
 		
 		//Putting the buttons ...
