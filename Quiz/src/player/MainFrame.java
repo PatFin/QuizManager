@@ -55,7 +55,7 @@ public class MainFrame extends JFrame implements RequestToFrame {
 
 	
 	private URL manualURL;
-	public final String QMmanual = "http://patfin.github.io/QuizManager/QuizManager_Manual_v1.0.html#QM";
+	public final String QMmanual = "http://patfin.github.io/QuizManager/QuizManager-v1.1_index.html";
 	
 	private static final long serialVersionUID = -5564000254022541818L;
 
@@ -149,8 +149,7 @@ public class MainFrame extends JFrame implements RequestToFrame {
 		// Creating the about menu
 		aboutMenu = new JMenu("About");
 		aboutMenu.setMnemonic(KeyEvent.VK_H);
-		aboutMenu.getAccessibleContext()
-				.setAccessibleDescription("When what you are looking for isn't in the other categories.");
+		aboutMenu.getAccessibleContext().setAccessibleDescription("When what you are looking for isn't in the other categories.");
 
 		creditsItem = new JMenuItem("Credits", KeyEvent.VK_C);
 		creditsItem.getAccessibleContext().setAccessibleDescription("Read the credits");

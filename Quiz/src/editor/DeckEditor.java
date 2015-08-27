@@ -61,7 +61,7 @@ public class DeckEditor extends JFrame implements EditorListener{
 	private static final long serialVersionUID = -6703163134409694786L;
 
 	private URL manualURL;
-	public final String editorManual = "http://patfin.github.io/QuizManager/QuizManager_Manual_v1.0.html#EDITOR";
+	public final String editorManual = "http://patfin.github.io/QuizManager/QuizManager-v1.1_index.html";
 	
 	private Deck deck;
 	private DeckEle currentDeckEle;
