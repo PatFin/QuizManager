@@ -31,9 +31,9 @@ You should find enough information there.
 <h4>in the Player</h4>
 <ul>
 <li>- [X] Propose an option after a quiz to repeat the quiz with only the questions on which the user had trouble getting the right answer
-<p>In Learning mode -> Put questions with more than X nb of wrong answers, in Test mode -> Put the questions to which the user gave a wrong answer.</p> ~~ needs debogging.
+<p>In Learning mode -> Put questions with more than X nb of wrong answers, in Test mode -> Put the questions to which the user gave a wrong answer. ~ Debug done</p> 
 </li> 
-<li>- [X] Add a preferences save system</li>
+<li>- [X] Add a preferences save system ~ Debug done</li>
 <li>- [X] Add nb failures to add question to difficult in Learning mode to Preferences options.</li>
 <li>- [ ] Add possibility to skip congratulation message in Learning mode and go to next question when a good answer is provided</li>
 <li>- [ ] ...</li>

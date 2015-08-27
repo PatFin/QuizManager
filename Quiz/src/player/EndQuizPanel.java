@@ -45,12 +45,10 @@ public class EndQuizPanel extends JPanel {
 		//Putting the message
 		this.message = new JTextArea (aMessage +"\n"+"\n"+
 				"You can now decide to repeat the whole deck once more.\n"+
-				"Or you can choose to study only the questions that\n"+
-				"you struggled with. Or even change of deck !\n"+
+				"Or you can choose to study only the questions you\n"+
+				"struggled with. Or choose a different deck !\n"+
 				"It's up to you!");
 		this.add(message);
-		
-		//TODO have a better layout for the message. This is total crap!
 		
 		//Putting the buttons ...
 		Box b = new Box(BoxLayout.LINE_AXIS);

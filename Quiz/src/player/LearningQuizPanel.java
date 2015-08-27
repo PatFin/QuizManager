@@ -48,9 +48,9 @@ public class LearningQuizPanel extends QuizPanel {
 			q.failed++;
 			
 			/**If the question was failed a certain number of times, we add it to the difficult question list.
-			 * Not that a failed>3 would not work because the question will be added multiple times!
+			 * Not that a failed>x would not work because the question will be added multiple times!
 			 */
-			if(q.failed == 3) {
+			if(q.failed == failuresNeededForLearningMode) {
 				difficult.addQuestion(q);
 			}
 		}
@@ -64,7 +64,6 @@ public class LearningQuizPanel extends QuizPanel {
 
 	@Override
 	public void endQuiz() {
-		// TODO Auto-generated method stub
-		
+		container.requestEndQuiz(currentDeck, difficult, "Congratulations, you have finished this deck!");
 	}
 }

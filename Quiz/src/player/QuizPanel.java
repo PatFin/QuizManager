@@ -102,7 +102,7 @@ public abstract class QuizPanel extends javax.swing.JPanel implements AnswerProv
 					break;
 				case ANSWER:
 					if (currentDeck.noQuestionLeft()) {
-						container.requestEndQuiz(currentDeck, difficult, "Congratulations, you have finished this deck!");
+						endQuiz();
 					} else {
 						setQuestion(currentDeck.next());
 					}
@@ -128,10 +128,8 @@ public abstract class QuizPanel extends javax.swing.JPanel implements AnswerProv
 	}
 
 	/**
-	 * Allows to display a question in the interface. This operation changes the
-	 * 
-	 * @param q
-	 *            the question to be displayed
+	 * Allows to display a question in the interface. This operation changes the QuizState to Question
+	 * @param q the question to be displayed
 	 */
 	public void setQuestion(Question q) {
 		this.question.setText(q.question);
@@ -150,6 +148,7 @@ public abstract class QuizPanel extends javax.swing.JPanel implements AnswerProv
 	 * Defines what is to be done when the deck reaches its last card.
 	 */
 	public abstract void endQuiz();
+	
 	/**
 	 * Launches a new quiz with the deck given as parameter. All the cards in
 	 * the deck will be seen. If the number of success to a question is lower
@@ -165,6 +164,7 @@ public abstract class QuizPanel extends javax.swing.JPanel implements AnswerProv
 	public void handleQuiz(Deck d) {
 		try {
 			d.rewind();
+			d.resetSuccess();
 			this.originalDeck = d;
 			this.difficult = new Deck ();
 			//We create a copy of the deck

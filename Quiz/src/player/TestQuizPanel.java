@@ -1,5 +1,7 @@
 package player;
 
+import util.Deck;
+
 @SuppressWarnings("serial")
 public class TestQuizPanel extends QuizPanel {
 
@@ -7,13 +9,20 @@ public class TestQuizPanel extends QuizPanel {
 	int nbQuestions;
 	
 	/**
-	 * 
-	 * @param o
+	 * Constructor for TestQuizPanel
+	 * Requires only the container which has to implement RequestToFrame
+	 * @param o the object that implements RequestToFrame.
 	 */
 	public TestQuizPanel(RequestToFrame o) {
 		super(o);
 	}
 
+	@Override
+	public void handleQuiz (Deck d) {
+		super.handleQuiz(d);
+		this.goodAnswers = 0;
+		this.nbQuestions = 0;
+	}
 	/*
 	 * (non-Javadoc)
 	 * @see display.QuizPanel#showAnswer(boolean)

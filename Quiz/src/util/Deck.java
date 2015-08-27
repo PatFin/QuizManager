@@ -56,11 +56,7 @@ public class Deck {
 	 * @return true if deck contains no question, false otherwise.
 	 */
 	public boolean isEmpty () {
-		try {
-			return Question.areIdentical(root.question, new Question());
-		} catch (NullPointerException e) {
-			return false;
-		}
+		return this.getAllQuestions().size() == 0;
 	}
 	/**
 	 * Adds the question given as parameter at the end of the list
@@ -99,6 +95,7 @@ public class Deck {
 	 */
 	public ArrayList<Question> getAllQuestions() {
 		ArrayList<Question> a = new ArrayList<Question>();
+		this.rewind();
 		DeckEle e = root;
 		if (e != null) {
 			while (e != null) {
