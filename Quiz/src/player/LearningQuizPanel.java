@@ -15,6 +15,14 @@ public class LearningQuizPanel extends QuizPanel {
 	 * failures is the number of times you need to fail a question so that it will be added to the difficult questions deck.
 	 */
 	public static int failuresNeededForLearningMode;
+	
+	/**
+	 * Parameter for the learning mode.
+	 * If true, the congratulation message displayed after a correct answer will not be disaplayed.
+	 * Instead, the next question will be displayed immediately.
+	 */
+	public static boolean skipExplanationWhenCorrectAnswer;
+	
 	/**
 	 * Constructor
 	 * This constructor only invoke that of the mother class QuizPanel. 
@@ -32,14 +40,6 @@ public class LearningQuizPanel extends QuizPanel {
 	 */
 	@Override
 	public void showAnswer(boolean goodAnswer) {
-		if(goodAnswer){
-			answers.expl.setText("Well Done!\n");
-		}
-		
-		
-		answers.showExplanation(goodAnswer);
-		next.setText("Next Question ->");
-
 		// We increment success of the question if goodAnswer
 		Question q = currentDeck.getCurrentQuestion();
 		if (goodAnswer) {
@@ -53,17 +53,32 @@ public class LearningQuizPanel extends QuizPanel {
 			if(q.failed == failuresNeededForLearningMode) {
 				difficult.addQuestion(q);
 			}
-		}
-		
+		}		
 		// We add again the question at the end of the deck if it hasn't been succeeded enough yet.
 		if (q.success < LearningQuizPanel.successNeededForMearningMode) {
 			currentDeck.addQuestion(q);
 		}
+		
+		
+		//We prepare the next question
 		this.state = QuizState.ANSWER;
+		
+		//Special skip explanation mode
+		if (goodAnswer && skipExplanationWhenCorrectAnswer) {
+			//We skip the explanation and go to the next question.
+			next.doClick();
+			return;
+		} else {
+			if(goodAnswer){
+				answers.expl.setText("Well Done!\n");
+			}
+			next.setText("Next Question ->");
+			answers.showExplanation(goodAnswer);
+		}
 	}
 
 	@Override
 	public void endQuiz() {
-		container.requestEndQuiz(currentDeck, difficult, "Congratulations, you have finished this deck!");
+		container.requestEndQuiz(originalDeck, difficult, "Congratulations, you have finished this deck!");
 	}
 }

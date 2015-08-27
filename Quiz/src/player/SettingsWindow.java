@@ -7,6 +7,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 import javax.swing.JButton;
+import javax.swing.JCheckBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
@@ -21,9 +22,10 @@ import util.ConfigWriter;
 public class SettingsWindow extends JFrame {
 
 	private JButton cancelButton, saveButton;
-	private JLabel learningGoodAnswers, learningWrongAnswers, learningTitle;
+	private JLabel learningGoodAnswers, learningWrongAnswers, learningTitle, learningSkipExplanation;
 	private JPanel buttonPanel;
 	private JTextField lGoodAnswerField, lWrongAnswerField;	
+	private JCheckBox skipExplanationCBox;
 	
 	/**
 	 * Constructor
@@ -90,8 +92,26 @@ public class SettingsWindow extends JFrame {
 		c.gridy = 3;
 		this.add(lWrongAnswerField, c);
 		
-		//Row 4 JSeperator
+		//row 4 - checkbox skip explanation after good answer
+		learningSkipExplanation = new JLabel("Skip explanation after a good answer:");
+		skipExplanationCBox = new JCheckBox();
+		c.fill = GridBagConstraints.BOTH;
+		c.anchor = GridBagConstraints.LINE_START;
+		c.gridheight = 1;
+		c.gridwidth = 3;
+		c.gridx = 0;
 		c.gridy = 4;
+		this.add(learningSkipExplanation, c);
+		c.fill = GridBagConstraints.BOTH;
+		c.anchor = GridBagConstraints.LINE_END;
+		c.gridheight = 1;
+		c.gridwidth = 1;
+		c.gridx = 3;
+		c.gridy = 4;
+		this.add(skipExplanationCBox, c);
+		
+		//Row 5 JSeperator
+		c.gridy = 5;
 		c.gridx = 0;
 		c.weightx = 0.0;
 		c.weighty = 0.0;
@@ -99,7 +119,7 @@ public class SettingsWindow extends JFrame {
 		c.gridheight = 1;
 		this.add(new JSeparator(SwingConstants.HORIZONTAL), c);
 		
-		//row 5
+		//row 6
 		//Creating buttons for validation and stuff
 		buttonPanel = new JPanel(new GridLayout(1, 2));
 		
@@ -114,17 +134,17 @@ public class SettingsWindow extends JFrame {
 		c.gridheight = 2;
 		c.gridwidth = 4;
 		c.gridx = 0;
-		c.gridy = 4;
+		c.gridy = 6;
 		this.add(buttonPanel, c);
 		
-		this.pack();
+		this.setSize(350,200);
 		this.setVisible(false);	//We do not show the window when it is created. Only when the window is requested by the MainFrame will it display.
 	}
 	
 	public void refreshValues () {
 		this.lGoodAnswerField.setText(String.valueOf(LearningQuizPanel.successNeededForMearningMode));
 		this.lWrongAnswerField.setText(String.valueOf(LearningQuizPanel.failuresNeededForLearningMode));
-		
+		this.skipExplanationCBox.setSelected(LearningQuizPanel.skipExplanationWhenCorrectAnswer);
 	}
 	
 	
@@ -146,6 +166,10 @@ public class SettingsWindow extends JFrame {
 			System.out.println("Unable to get the values from the TextField for Wrong answer number.");
 			noError = false;
 		}
+		LearningQuizPanel.skipExplanationWhenCorrectAnswer = skipExplanationCBox.isSelected();
+		
+		
+		
 		if (noError) {
 			JOptionPane.showMessageDialog(null,
 					"Settings changed successfully.",

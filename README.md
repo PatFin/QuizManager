@@ -35,6 +35,6 @@ You should find enough information there.
 </li> 
 <li>- [X] Add a preferences save system ~ Debug done</li>
 <li>- [X] Add nb failures to add question to difficult in Learning mode to Preferences options.</li>
-<li>- [ ] Add possibility to skip congratulation message in Learning mode and go to next question when a good answer is provided</li>
+<li>- [X] Add possibility to skip congratulation message in Learning mode and go to next question when a good answer is provided</li>
 <li>- [ ] ...</li>
 </ul>
