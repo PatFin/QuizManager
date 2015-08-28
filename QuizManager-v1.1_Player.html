@@ -1,0 +1,90 @@
+<!DOCTYPE=HTML>
+<html>
+	<head>
+		<meta charset="UTF-8" />
+		<link rel="stylesheet" href="stylesheets/styles_manual.css">
+		<title>Quiz Player v1.1manual</title>
+	</head>
+
+	<body>
+		<div class="wrapper">
+			<header>
+				<h1>Quiz Player v1.1 manual</h1>
+				<p>Welcome to the Quiz Manager Player manual.</p>
+				<p>You will find here all the information about the <em>Quiz Player</em>, how to take quizzes, the settings you can change and so on. </p>
+			</header>
+			<nav>
+			
+			</nav>
+			
+			<div><!-- Begining of the QPlayer manual -->
+				<section id="QP1"><!-- Beginning of section; Taking a Quiz -->
+					<h2>Taking a Quiz</h2>
+					<p>Here are the few steps you need to follow to take a Quiz with <em>Quiz Player</em>.</p>
+					<ol><!-- Beginning of steps to follow to launch a Quiz -->
+					
+						<li><h3>Launching Quiz Player</h3>
+							<p>The Quiz Player is a <em>Java Archive</em>. Therefore you will need a <em>Java Runtime Environment</em> installed on your system to launch it. Usuallly a double-click on the icon will launch the application. If it doesn't, try right click and <em>Open with: Java Runtime (JRE)</em> or similar.</p>
+							<p>As an alternative, you can type "java -jar Quiz-Player-v1.1.jar" in the command line where you have stored the Quiz Player archive.</p>
+							<p class="remark">If none of these work, try to get the latest Java Runtime Environment (JRE) from the <a href="" target="_blank">Oracle website</a>.</p><!-- TODO set link-->
+							<p>The following window should now appear on the screen.</p>
+							<img src="Images/1.1/QPwindow.png" alt="Quiz Player Welcome window">
+						</li><!-- End of launching QP -->
+						
+						<li><h3>Choosing a Deck</h3>
+							<p>The next step is to choose a Deck in your file system</p>
+							
+							<section class="remark">
+								<h4>A Deck?</h4>
+								<p>A Deck is a set of questions. In Quiz Manager, each Question is made of:</p>
+								<ul>
+									<li>A question</li>
+									<li>An answer</li>
+									<li>Three wrong answers</li>
+									<li>An explanation</li>
+								</ul>
+								<p>Decks are stored on your file system as 'Deck files' (.dk). </p>
+								<p class="warning"><strong>Warning!</strong> <br />
+								As far as I know, no other program uses this extension. But if you happen to find a .dk file which doesn't look like a Quiz Manager Deck, it is probably best to avoid opening it.</p>
+							</section><!-- End of the remark -->
+							
+							<p>To choose a Deck on your file system, you will need to click on the <em>File -> Load Deck</em> menu item.</p>
+							<img src="Images/1.1/QPfileLoadDeck.png" alt ="File Load Deck item">
+							<p>This will open a File chooser windowlike the one just below that will let you choose Deck file on your system. You can use the filter either display all the files or only your folders and the Deck (.dk) files.</p>
+							<img src="Images/1.0/QM_openingdeck.png" alt="Load deck file chooser image">
+						</li><!-- End of choosing a deck -->
+						
+						<li><h3>The Deck Mode choice</h3>
+							<p>After you have chosen a Deck in your file system, the Quiz Player will prompt you to choose a Quiz Mode.</p>
+							<img src="Images/1.1/QPmodeChoice.png" alt="Mode choice window image">
+							<ul>
+								<li><h4>Test mode</h4>
+								<p>The test mode is rather simple. You will go through all the question of the Deck once. As soon as you provide an answer, the next question will be presented to you. </p>
+								<p>Once you have been through all the question contained in the Deck, your score will appear. For instance, a score of 2/3 means you gave 2 correct answers out of 3 questions.</p>
+								</li><!-- End of the learning mode description -->
+								
+								<li><h4>Learning mode</h4>								
+								<p>The learning mode is a bit more complicated. Depending on what you answer to a question, different things can happen.</p>
+								<p>If you give a wrong answer, before going to the next question, an explanation will appear. Hopefully whoever created the Deck put enough information for you to answer correctly next time.<br />
+								If you give a correct answer you will either see a congratullation message or directly go to the next question. This can be changed to your preference in the <a href="#">options</a>.</p>
+								<p>The questions contained in the Deck will <em>keep reapearing</em> until you provide enough good answers. By default, this number is 3, but you can change it in the <a href="">options</a>.</p>
+								</li><!-- End of the Test mode description -->
+							</ul><!-- End of the list of mode -->
+						</li><!-- End of Deck mode choice -->
+						
+						<li><h3>During the Quiz</h3>
+							<p>You will encounter two kinds of display during a Quiz.
+						</li>
+						
+					</ol><!-- End of steps to follow to launch a Quiz -->
+				</section><!-- End of section:taking a Quiz -->
+				
+			</div><!-- End of hte QPlayer manual -->
+			
+			<footer>
+				<p>Document published under the <a href="http://www.gnu.org/licenses/fdl.html" target="_blank">GNU Free Documentation License</a>.</p>
+				<p>Author: Patrick Finnerty</p>
+			</footer>
+		</div>
+	</body>
+</html>
