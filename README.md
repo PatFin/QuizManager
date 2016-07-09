@@ -1,46 +1,40 @@
 # QuizManager
 This repository contains the files for the java desktop application QuizManager.
-We are currently at version 1.0 of the software.
+You are in the dev branch of the project.
 
 <h2>You wish to use or download the software?</h2>
 
 You can go to the project page http://patfin.github.io/QuizManager !
 You should find enough information there. 
 
-<h2>You are an interested Devlopper?</h2>
-
-You can either fork this project and do your own stuff with it.
-
-Or you can try to go into the dev branch and see what will be coming soon and what is left to do!
-
-<h3>Javadoc</h3>
-You will find the JAVADOC in the Quiz/doc/ folder.
-
-<h3>package organisation in the main branch</h3>
-
+<h2>TO DO</h2>
+<h3>Structure</h3>
 <ul>
-<li>deck</li>
-<li>display</li>
-<li>fileHandler</li>
+<li>- [X] Make a better separation of what will now be called Quiz Player and Quiz Editor.~~
+<p>This should eventually lead to two different java archive downloads. </p>
+<p>The user manual will have to be seperated into two different pages (currently a single one)</p>
+</li>
 </ul>
 
-<h4>Package deck</h4> 
-It contains the classes that deals with a quiz as an object. 
+<h3>New Features</h3>
+<h4>in the Editor</h4>
 <ul>
-<li>Classes Deck and DeckEle consist of a kind of linkedList used to easily manage a quiz. </li>
-<li>Class Question contains all the elements of a question, that is the question, a correct answer, three wrong answers and an explanation. </li>
-<li>Class DeckFileFilter extends FileFilter and is used when a JFileChooser is opened to let the user choose a deck file. </li>
+<li>- [X] Implement a warning against unsaved document when the user is about to remove all the current fields (on New Deck option for instance</li>
+<li>- [ ] Implement an overview system to allow the user to see all the questions at once</li>
+<li>- [X] Implement a question check upon file saving. Warn the user that some questions are empty and propose removal of those</li>
+<li>- [ ] Add a toolbar to the editor (with the possibility to hide it in Preferences menu) with buttons for question insert and removal, deck save options and so on ...</li>
+<li>- [X] Add a message on save indicating success</li>
+<li>- [X] Add a link to user manual in the MenuBar</li>
+<li>- [ ] ...</li>
 </ul>
 
-<h4>Package display</h4> 
-It contains all the classes used to manage the display of the application.
+<h4>in the Player</h4>
 <ul>
-<li>MainFrame is (true to its name) the main frame of the application. It uses a CardLayout to alternatively display several Panels. <em>It contains a main method that launches a QuizManager window.</em></li>
-<li>DeckEditor is the JFrame that handles the editing of decks. <em>It contains a main method that launches a QuizManager window.</em></li>
-</ul>
-
-<h4>Package fileHandler</h4> 
-So far it contains a single class:
-<ul>
-<li>Class DeckWriter is the class capable of converting a Deck object into a text writable in a file. It also contains a method capable of converting a text (from a file) into a Deck object (if formated correctly). </li>
+<li>- [X] Propose an option after a quiz to repeat the quiz with only the questions on which the user had trouble getting the right answer
+<p>In Learning mode -> Put questions with more than X nb of wrong answers, in Test mode -> Put the questions to which the user gave a wrong answer. ~ Debug done</p> 
+</li> 
+<li>- [X] Add a preferences save system ~ Debug done</li>
+<li>- [X] Add nb failures to add question to difficult in Learning mode to Preferences options.</li>
+<li>- [X] Add possibility to skip congratulation message in Learning mode and go to next question when a good answer is provided</li>
+<li>- [ ] ...</li>
 </ul>
